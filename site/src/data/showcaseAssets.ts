@@ -20,9 +20,24 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     keyboardMode: "full",
     sourceFiles: [{ label: "alarm_clock.py", href: `${w}/P6 - Pygame Winner - ALARM CLOCK Ticks Timebomb/src/pygame second - p15 - GitHub/Pygame_P6-main/alarm_clock.py`, language: "python" }],
   },
-  p15: {
+p15: {
     slidePdf: `${w}/P15 - Pygame Runner-up - Finding the Way Home/slides/p15 - Canva/P15 Game Jam Where The Path Used to Be.pdf`,
-    sourceFiles: [],
+    sourceFiles: [
+      { label: "main.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/main.py`, language: "python" },
+      { label: "settings.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/settings.py`, language: "python" },
+      { label: "core/asset_manager.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/core/asset_manager.py`, language: "python" },
+      { label: "core/game_manager.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/core/game_manager.py`, language: "python" },
+      { label: "scenes/base_scene.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/base_scene.py`, language: "python" },
+      { label: "scenes/menu.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/menu.py`, language: "python" },
+      { label: "scenes/prologue.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/prologue.py`, language: "python" },
+      { label: "scenes/chapter1.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter1.py`, language: "python" },
+      { label: "scenes/chapter2.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter2.py`, language: "python" },
+      { label: "scenes/chapter3.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter3.py`, language: "python" },
+      { label: "scenes/chapter4.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter4.py`, language: "python" },
+      { label: "systems/audio.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/audio.py`, language: "python" },
+      { label: "systems/glitch.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/glitch.py`, language: "python" },
+      { label: "systems/transition.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/transition.py`, language: "python" },
+    ],
   },
   p26: {
     sourceFiles: [{ label: "homebound.py", href: `${w}/P26 - Pygame Second Runner-up - Homebound/src/Pygame_26/Pygame_26-main/homebound.py`, language: "python" }],

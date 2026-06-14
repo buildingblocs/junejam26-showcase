@@ -48,7 +48,7 @@ export const games: GameEntry[] = [
   },
   {
     slug: "p15",
-    title: "Finding Way Home",
+    title: "Finding the Way Home",
     teamCode: "P15",
     track: "Pygame",
     category: "ranked",
@@ -66,7 +66,7 @@ export const games: GameEntry[] = [
       },
     ],
     playNote:
-      "The matching P15 source and slides were not identifiable in the downloaded files after the label corrections, so no playable build is available yet.",
+      "The P15 Python source has been recovered, but it still needs an exact browser export before it can run inside this page.",
   },
   {
     slug: "p26",
