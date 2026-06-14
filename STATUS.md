@@ -1,5 +1,12 @@
 # Current Status And Handoff
 
+## Latest Verified State
+
+- P6 is confirmed playable and deployed. The site embeds `site/public/play/p6/index.html`, the GitHub Pages deployment renders the actual `ALARM CLOCK: THE AWAKENING` title screen in the iframe, and P6 uses `keyboardMode: "full"` for on-screen controls.
+- P26 has a staged browser port under `site/playable-src/p26/`, with copied original assets and browser-compatible OGG audio. It compiles and `pygbag --build --archive --no_ssl_check --cdn https://pygame-web.github.io/archives/0.9/ site/playable-src/p26` produces an export, but direct browser testing hung the Chrome execution context and did not show a ready/title signal within 25 seconds. It must remain unembedded until a real browser run is confirmed.
+- P1 also remains unembedded after a direct browser export test hung during runtime testing.
+- Only confirmed playable builds should appear under `site/public/play/` and receive `playUrl` entries.
+
 Last updated: 2026-06-14 Asia/Singapore.
 
 ## Repository State
