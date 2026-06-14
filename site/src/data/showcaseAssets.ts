@@ -29,20 +29,76 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
   p15: {
     slidePdf: `${w}/P15 - Pygame Runner-up - Finding the Way Home/slides/p15 - Canva/P15 Game Jam Where The Path Used to Be.pdf`,
     sourceFiles: [
-      { label: "main.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/main.py`, language: "python" },
-      { label: "settings.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/settings.py`, language: "python" },
-      { label: "core/asset_manager.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/core/asset_manager.py`, language: "python" },
-      { label: "core/game_manager.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/core/game_manager.py`, language: "python" },
-      { label: "scenes/base_scene.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/base_scene.py`, language: "python" },
-      { label: "scenes/menu.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/menu.py`, language: "python" },
-      { label: "scenes/prologue.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/prologue.py`, language: "python" },
-      { label: "scenes/chapter1.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter1.py`, language: "python" },
-      { label: "scenes/chapter2.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter2.py`, language: "python" },
-      { label: "scenes/chapter3.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter3.py`, language: "python" },
-      { label: "scenes/chapter4.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter4.py`, language: "python" },
-      { label: "systems/audio.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/audio.py`, language: "python" },
-      { label: "systems/glitch.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/glitch.py`, language: "python" },
-      { label: "systems/transition.py", href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/transition.py`, language: "python" },
+      {
+        label: "main.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/main.py`,
+        language: "python",
+      },
+      {
+        label: "settings.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/settings.py`,
+        language: "python",
+      },
+      {
+        label: "core/asset_manager.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/core/asset_manager.py`,
+        language: "python",
+      },
+      {
+        label: "core/game_manager.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/core/game_manager.py`,
+        language: "python",
+      },
+      {
+        label: "scenes/base_scene.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/base_scene.py`,
+        language: "python",
+      },
+      {
+        label: "scenes/menu.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/menu.py`,
+        language: "python",
+      },
+      {
+        label: "scenes/prologue.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/prologue.py`,
+        language: "python",
+      },
+      {
+        label: "scenes/chapter1.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter1.py`,
+        language: "python",
+      },
+      {
+        label: "scenes/chapter2.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter2.py`,
+        language: "python",
+      },
+      {
+        label: "scenes/chapter3.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter3.py`,
+        language: "python",
+      },
+      {
+        label: "scenes/chapter4.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/scenes/chapter4.py`,
+        language: "python",
+      },
+      {
+        label: "systems/audio.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/audio.py`,
+        language: "python",
+      },
+      {
+        label: "systems/glitch.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/glitch.py`,
+        language: "python",
+      },
+      {
+        label: "systems/transition.py",
+        href: `${w}/P15 - Pygame Runner-up - Finding the Way Home/src/p15 - Drive/systems/transition.py`,
+        language: "python",
+      },
     ],
   },
   p26: {
@@ -56,39 +112,107 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
   },
   u8: {
     slidePdf: `${w}/U8 - Unity Winner - The Trash Wont Take Itself Out/slides/unity 1st - u8 - Canva/JuneJam U8.pdf`,
+    playUrl: "/play/u8/index.html",
+    keyboardMode: "full",
     sourceFiles: [
-      { label: "PlayerController.cs", href: `${w}/U8 - Unity Winner - The Trash Wont Take Itself Out/src/unity 1st - u8 - GitHub/Assets/Scripts/PlayerController.cs`, language: "csharp" },
-      { label: "PlayerSpit.cs", href: `${w}/U8 - Unity Winner - The Trash Wont Take Itself Out/src/unity 1st - u8 - GitHub/Assets/Scripts/PlayerSpit.cs`, language: "csharp" },
-      { label: "GameManager.cs", href: `${w}/U8 - Unity Winner - The Trash Wont Take Itself Out/src/unity 1st - u8 - GitHub/Assets/Scripts/GameManager.cs`, language: "csharp" },
+      {
+        label: "PlayerController.cs",
+        href: `${w}/U8 - Unity Winner - The Trash Wont Take Itself Out/src/unity 1st - u8 - GitHub/Assets/Scripts/PlayerController.cs`,
+        language: "csharp",
+      },
+      {
+        label: "PlayerSpit.cs",
+        href: `${w}/U8 - Unity Winner - The Trash Wont Take Itself Out/src/unity 1st - u8 - GitHub/Assets/Scripts/PlayerSpit.cs`,
+        language: "csharp",
+      },
+      {
+        label: "GameManager.cs",
+        href: `${w}/U8 - Unity Winner - The Trash Wont Take Itself Out/src/unity 1st - u8 - GitHub/Assets/Scripts/GameManager.cs`,
+        language: "csharp",
+      },
     ],
   },
   u4: {
+    playUrl: "/play/u4/index.html",
+    keyboardMode: "full",
     sourceFiles: [
-      { label: "FirstPersonController.cs", href: `${w}/U4 - Unity Runner-up - 5 More Minutes/src/unity second - u4 - GitHub/Unity_U4-main/Scripts/FirstPersonController.cs`, language: "csharp" },
-      { label: "NarratorManager.cs", href: `${w}/U4 - Unity Runner-up - 5 More Minutes/src/unity second - u4 - GitHub/Unity_U4-main/Scripts/NarratorManager.cs`, language: "csharp" },
-      { label: "KitchenSequenceManager.cs", href: `${w}/U4 - Unity Runner-up - 5 More Minutes/src/unity second - u4 - GitHub/Unity_U4-main/Scripts/KitchenSequenceManager.cs`, language: "csharp" },
+      {
+        label: "FirstPersonController.cs",
+        href: `${w}/U4 - Unity Runner-up - 5 More Minutes/src/unity second - u4 - GitHub/Unity_U4-main/Scripts/FirstPersonController.cs`,
+        language: "csharp",
+      },
+      {
+        label: "NarratorManager.cs",
+        href: `${w}/U4 - Unity Runner-up - 5 More Minutes/src/unity second - u4 - GitHub/Unity_U4-main/Scripts/NarratorManager.cs`,
+        language: "csharp",
+      },
+      {
+        label: "KitchenSequenceManager.cs",
+        href: `${w}/U4 - Unity Runner-up - 5 More Minutes/src/unity second - u4 - GitHub/Unity_U4-main/Scripts/KitchenSequenceManager.cs`,
+        language: "csharp",
+      },
     ],
   },
   u2: {
+    playUrl: "/play/u2/index.html",
+    keyboardMode: "full",
     sourceFiles: [
-      { label: "PlayerController.cs", href: `${w}/U2 - Unity Second Runner-up + Best Art - Taking OUT the Trash/src/unity third - u2 - GitHub/Assets/Scripts/PlayerController.cs`, language: "csharp" },
-      { label: "EnemySpawner.cs", href: `${w}/U2 - Unity Second Runner-up + Best Art - Taking OUT the Trash/src/unity third - u2 - GitHub/Assets/Scripts/EnemySpawner.cs`, language: "csharp" },
-      { label: "Navigation.cs", href: `${w}/U2 - Unity Second Runner-up + Best Art - Taking OUT the Trash/src/unity third - u2 - GitHub/Assets/Scripts/Navigation.cs`, language: "csharp" },
+      {
+        label: "PlayerController.cs",
+        href: `${w}/U2 - Unity Second Runner-up + Best Art - Taking OUT the Trash/src/unity third - u2 - GitHub/Assets/Scripts/PlayerController.cs`,
+        language: "csharp",
+      },
+      {
+        label: "EnemySpawner.cs",
+        href: `${w}/U2 - Unity Second Runner-up + Best Art - Taking OUT the Trash/src/unity third - u2 - GitHub/Assets/Scripts/EnemySpawner.cs`,
+        language: "csharp",
+      },
+      {
+        label: "Navigation.cs",
+        href: `${w}/U2 - Unity Second Runner-up + Best Art - Taking OUT the Trash/src/unity third - u2 - GitHub/Assets/Scripts/Navigation.cs`,
+        language: "csharp",
+      },
     ],
   },
   p17: {
     slidePdf: `${w}/P17 - CSIT Prize - BREACH/slides/csit prize - p17 - Canva/Breach.pdf`,
     sourceFiles: [
-      { label: "client.py", href: `${w}/P17 - CSIT Prize - BREACH/src/csit prize - p17 - GitHub/Pygame_P17-main/breach_mvp/client.py`, language: "python" },
-      { label: "server.py", href: `${w}/P17 - CSIT Prize - BREACH/src/csit prize - p17 - GitHub/Pygame_P17-main/breach_mvp/server.py`, language: "python" },
-      { label: "game_rules.py", href: `${w}/P17 - CSIT Prize - BREACH/src/csit prize - p17 - GitHub/Pygame_P17-main/breach_mvp/game_rules.py`, language: "python" },
+      {
+        label: "client.py",
+        href: `${w}/P17 - CSIT Prize - BREACH/src/csit prize - p17 - GitHub/Pygame_P17-main/breach_mvp/client.py`,
+        language: "python",
+      },
+      {
+        label: "server.py",
+        href: `${w}/P17 - CSIT Prize - BREACH/src/csit prize - p17 - GitHub/Pygame_P17-main/breach_mvp/server.py`,
+        language: "python",
+      },
+      {
+        label: "game_rules.py",
+        href: `${w}/P17 - CSIT Prize - BREACH/src/csit prize - p17 - GitHub/Pygame_P17-main/breach_mvp/game_rules.py`,
+        language: "python",
+      },
     ],
   },
   u16: {
+    playUrl: "/play/u16/index.html",
+    keyboardMode: "full",
     sourceFiles: [
-      { label: "PlayerController.cs", href: `${w}/U16 - Most Original Concept - A Day in the Life of a Blind Person/src/GamesJamU16/GamesJamU16/Assets/scripts/PlayerController.cs`, language: "csharp" },
-      { label: "CaneTap.cs", href: `${w}/U16 - Most Original Concept - A Day in the Life of a Blind Person/src/GamesJamU16/GamesJamU16/Assets/scripts/CaneTap.cs`, language: "csharp" },
-      { label: "QuestManager.cs", href: `${w}/U16 - Most Original Concept - A Day in the Life of a Blind Person/src/GamesJamU16/GamesJamU16/Assets/scripts/QuestManager.cs`, language: "csharp" },
+      {
+        label: "PlayerController.cs",
+        href: `${w}/U16 - Most Original Concept - A Day in the Life of a Blind Person/src/GamesJamU16/GamesJamU16/Assets/scripts/PlayerController.cs`,
+        language: "csharp",
+      },
+      {
+        label: "CaneTap.cs",
+        href: `${w}/U16 - Most Original Concept - A Day in the Life of a Blind Person/src/GamesJamU16/GamesJamU16/Assets/scripts/CaneTap.cs`,
+        language: "csharp",
+      },
+      {
+        label: "QuestManager.cs",
+        href: `${w}/U16 - Most Original Concept - A Day in the Life of a Blind Person/src/GamesJamU16/GamesJamU16/Assets/scripts/QuestManager.cs`,
+        language: "csharp",
+      },
     ],
   },
   p14: {
@@ -122,10 +246,24 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     ],
   },
   u13: {
+    playUrl: "/play/u13/index.html",
+    keyboardMode: "full",
     sourceFiles: [
-      { label: "PlayerController.cs", href: `${w}/U13 - Most Overengineered - TinyExplorer/src/most overengineered - u13 - GitHub/Unity_U13-main/Assets/Scripts/PlayerController.cs`, language: "csharp" },
-      { label: "waterRIsing.cs", href: `${w}/U13 - Most Overengineered - TinyExplorer/src/most overengineered - u13 - GitHub/Unity_U13-main/Assets/Scripts/waterRIsing.cs`, language: "csharp" },
-      { label: "keyTrigger.cs", href: `${w}/U13 - Most Overengineered - TinyExplorer/src/most overengineered - u13 - GitHub/Unity_U13-main/Assets/Scripts/keyTrigger.cs`, language: "csharp" },
+      {
+        label: "PlayerController.cs",
+        href: `${w}/U13 - Most Overengineered - TinyExplorer/src/most overengineered - u13 - GitHub/Unity_U13-main/Assets/Scripts/PlayerController.cs`,
+        language: "csharp",
+      },
+      {
+        label: "waterRIsing.cs",
+        href: `${w}/U13 - Most Overengineered - TinyExplorer/src/most overengineered - u13 - GitHub/Unity_U13-main/Assets/Scripts/waterRIsing.cs`,
+        language: "csharp",
+      },
+      {
+        label: "keyTrigger.cs",
+        href: `${w}/U13 - Most Overengineered - TinyExplorer/src/most overengineered - u13 - GitHub/Unity_U13-main/Assets/Scripts/keyTrigger.cs`,
+        language: "csharp",
+      },
     ],
   },
 };

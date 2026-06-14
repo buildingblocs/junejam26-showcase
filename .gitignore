@@ -9,6 +9,9 @@ __pycache__/
 /site/.astro/
 /site/playable-src/*/build/
 /site/playable-src/*/__pycache__/
+/site/playable-src/unity/logs/
+/site/playable-src/unity/u*/
+!/site/playable-src/unity/BuildWebGL.cs
 
 npm-debug.log*
 yarn-debug.log*
