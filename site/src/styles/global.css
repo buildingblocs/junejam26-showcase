@@ -271,6 +271,22 @@ h3 {
   color: #bbf7d0;
 }
 
+.tag.play-state {
+  border-style: solid;
+}
+
+.tag.play-state.playable {
+  background: rgba(52, 211, 153, 0.16);
+  border-color: rgba(52, 211, 153, 0.55);
+  color: #bbf7d0;
+}
+
+.tag.play-state.pending {
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.36);
+  color: #dbe4ef;
+}
+
 .meta-line {
   margin-top: 16px;
   color: var(--accent);
@@ -365,6 +381,17 @@ h3 {
 
 .side-panel section {
   padding: 20px;
+}
+
+.panel-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-heading-row .eyebrow {
+  margin-bottom: 0;
 }
 
 .play-frame {
@@ -544,11 +571,38 @@ h3 {
   background-size: 28px 28px;
 }
 
+.pdf-load-panel {
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+  align-content: center;
+  gap: 16px;
+  justify-self: stretch;
+  color: var(--muted);
+  text-align: center;
+}
+
+.pdf-load-panel p {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+}
+
 .pdf-stage canvas {
   max-width: 100%;
   border-radius: 6px;
   background: #ffffff;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+.deck-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  transform-origin: top center;
 }
 
 .pdf-fallback {

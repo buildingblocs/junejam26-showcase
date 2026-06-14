@@ -1,26 +1,52 @@
 ---
 import { withBase } from "../utils/paths";
 
-const { src, title } = Astro.props as { src: string; title: string };
+const {
+  src,
+  title,
+  slideImages = [],
+} = Astro.props as { src: string; title: string; slideImages?: string[] };
 const encodedSrc = encodeURI(withBase(src));
+const encodedImages = slideImages.map((image) => encodeURI(withBase(image)));
+const hasImages = encodedImages.length > 0;
 ---
 
-<div class="pdf-viewer" data-pdf-viewer data-pdf-src={encodedSrc}>
+<div
+  class:list={["pdf-viewer", hasImages && "image-deck-viewer"]}
+  data-pdf-viewer
+  data-pdf-src={encodedSrc}
+  data-slide-images={JSON.stringify(encodedImages)}
+>
   <div class="pdf-toolbar">
     <div>
       <p class="eyebrow">Deck viewer</p>
       <strong>{title}</strong>
     </div>
     <div class="pdf-controls">
-      <button type="button" data-pdf-prev aria-label="Previous slide">Prev</button>
-      <span data-pdf-status>Loading...</span>
-      <button type="button" data-pdf-next aria-label="Next slide">Next</button>
-      <button type="button" data-pdf-zoom-out aria-label="Zoom out">-</button>
-      <button type="button" data-pdf-zoom-in aria-label="Zoom in">+</button>
+      {!hasImages && <button type="button" data-pdf-load>Load deck</button>}
+      <button type="button" data-pdf-prev aria-label="Previous slide" disabled>Prev</button>
+      <span data-pdf-status>{hasImages ? `1 / ${encodedImages.length}` : "Ready"}</span>
+      <button type="button" data-pdf-next aria-label="Next slide" disabled={!hasImages || encodedImages.length <= 1}>
+        Next
+      </button>
+      <button type="button" data-pdf-zoom-out aria-label="Zoom out" disabled>-</button>
+      <button type="button" data-pdf-zoom-in aria-label="Zoom in" disabled>+</button>
     </div>
   </div>
-  <div class="pdf-stage">
-    <canvas data-pdf-canvas></canvas>
+  <div class="pdf-stage" data-pdf-stage>
+    {
+      hasImages ? (
+        <img class="deck-image" src={encodedImages[0]} alt={`${title} slide 1`} data-deck-image decoding="async" />
+      ) : (
+        <div class="pdf-load-panel">
+          <p>Presentation deck</p>
+          <button type="button" class="button primary" data-pdf-load>
+            Load deck
+          </button>
+        </div>
+      )
+    }
+    <canvas data-pdf-canvas hidden></canvas>
   </div>
   <div class="pdf-fallback" hidden data-pdf-fallback>
     <p>Could not render deck in the custom viewer.</p>
@@ -30,23 +56,96 @@ const encodedSrc = encodeURI(withBase(src));
 
 <script>
   // @ts-nocheck
-  import * as pdfjsLib from "pdfjs-dist";
-  import workerUrl from "pdfjs-dist/build/pdf.worker.mjs?url";
+  const preloadImage = (src) =>
+    new Promise((resolve) => {
+      const image = new Image();
+      image.onload = resolve;
+      image.onerror = resolve;
+      image.src = src;
+    });
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
+  const initImageDeck = (viewer) => {
+    const images = JSON.parse(viewer.dataset.slideImages || "[]");
+    if (images.length === 0 || viewer.dataset.imageReady === "true") return;
+    viewer.dataset.imageReady = "true";
 
-  const renderViewer = async (viewer) => {
+    const image = viewer.querySelector("[data-deck-image]");
+    const status = viewer.querySelector("[data-pdf-status]");
+    const previous = viewer.querySelector("[data-pdf-prev]");
+    const next = viewer.querySelector("[data-pdf-next]");
+    const zoomIn = viewer.querySelector("[data-pdf-zoom-in]");
+    const zoomOut = viewer.querySelector("[data-pdf-zoom-out]");
+    let pageNumber = 1;
+    let scale = 1;
+    let preloadedAll = false;
+
+    const setStatus = () => {
+      status.textContent = `${pageNumber} / ${images.length}`;
+      previous.disabled = pageNumber <= 1;
+      next.disabled = pageNumber >= images.length;
+      zoomIn.disabled = false;
+      zoomOut.disabled = false;
+      image.style.width = `${Math.round(scale * 100)}%`;
+    };
+
+    const preloadFirstPages = () => {
+      images.slice(1, 3).forEach((src) => preloadImage(src));
+    };
+
+    const preloadRemaining = () => {
+      if (preloadedAll || pageNumber < 2) return;
+      preloadedAll = true;
+      images.slice(3).forEach((src) => preloadImage(src));
+    };
+
+    const showPage = async (nextPage) => {
+      pageNumber = nextPage;
+      image.alt = `${viewer.querySelector(".pdf-toolbar strong")?.textContent ?? "Presentation"} slide ${pageNumber}`;
+      image.src = images[pageNumber - 1];
+      setStatus();
+      preloadRemaining();
+    };
+
+    previous.addEventListener("click", () => {
+      if (pageNumber > 1) showPage(pageNumber - 1);
+    });
+
+    next.addEventListener("click", () => {
+      if (pageNumber < images.length) showPage(pageNumber + 1);
+    });
+
+    zoomIn.addEventListener("click", () => {
+      scale = Math.min(scale + 0.1, 1.6);
+      setStatus();
+    });
+
+    zoomOut.addEventListener("click", () => {
+      scale = Math.max(scale - 0.1, 0.7);
+      setStatus();
+    });
+
+    preloadFirstPages();
+    setStatus();
+  };
+
+  const initPdfViewer = async (viewer) => {
     if (viewer.dataset.ready === "true") return;
     viewer.dataset.ready = "true";
 
+    const pdfjsLib = await import("pdfjs-dist");
+    const workerUrl = await import("pdfjs-dist/build/pdf.worker.mjs?url");
+    pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl.default;
+
     const canvas = viewer.querySelector("[data-pdf-canvas]");
-    const stage = viewer.querySelector(".pdf-stage");
+    const stage = viewer.querySelector("[data-pdf-stage]");
+    const loadPanel = viewer.querySelector(".pdf-load-panel");
     const status = viewer.querySelector("[data-pdf-status]");
     const fallback = viewer.querySelector("[data-pdf-fallback]");
     const previous = viewer.querySelector("[data-pdf-prev]");
     const next = viewer.querySelector("[data-pdf-next]");
     const zoomIn = viewer.querySelector("[data-pdf-zoom-in]");
     const zoomOut = viewer.querySelector("[data-pdf-zoom-out]");
+    const loadButtons = viewer.querySelectorAll("[data-pdf-load]");
     const context = canvas.getContext("2d");
 
     let pdf;
@@ -55,23 +154,28 @@ const encodedSrc = encodeURI(withBase(src));
     let rendering = false;
 
     const setStatus = () => {
-      if (!pdf) return;
+      if (!pdf) {
+        status.textContent = "Loading...";
+        return;
+      }
       status.textContent = `${pageNumber} / ${pdf.numPages}`;
       previous.disabled = pageNumber <= 1;
       next.disabled = pageNumber >= pdf.numPages;
+      zoomIn.disabled = false;
+      zoomOut.disabled = false;
     };
 
     const renderPage = async () => {
       if (!pdf || rendering) return;
       rendering = true;
-
       const page = await pdf.getPage(pageNumber);
       const baseViewport = page.getViewport({ scale: 1 });
       const availableWidth = Math.max(stage.clientWidth - 32, 320);
-      const fitScale = Math.min(availableWidth / baseViewport.width, 1.8);
-      const viewport = page.getViewport({ scale: fitScale * scale });
+      const responsiveScale = Math.min(availableWidth / baseViewport.width, 1.45);
+      const viewport = page.getViewport({ scale: responsiveScale * scale });
       const ratio = window.devicePixelRatio || 1;
 
+      canvas.hidden = false;
       canvas.width = Math.floor(viewport.width * ratio);
       canvas.height = Math.floor(viewport.height * ratio);
       canvas.style.width = `${Math.floor(viewport.width)}px`;
@@ -84,8 +188,14 @@ const encodedSrc = encodeURI(withBase(src));
       setStatus();
     };
 
+    loadButtons.forEach((button) => {
+      button.disabled = true;
+    });
+    setStatus();
+
     try {
       pdf = await pdfjsLib.getDocument({ url: viewer.dataset.pdfSrc }).promise;
+      loadPanel.hidden = true;
       setStatus();
       await renderPage();
     } catch (error) {
@@ -126,5 +236,15 @@ const encodedSrc = encodeURI(withBase(src));
     });
   };
 
-  document.querySelectorAll("[data-pdf-viewer]").forEach(renderViewer);
+  document.querySelectorAll("[data-pdf-viewer]").forEach((viewer) => {
+    const images = JSON.parse(viewer.dataset.slideImages || "[]");
+    if (images.length > 0) {
+      initImageDeck(viewer);
+      return;
+    }
+
+    viewer.querySelectorAll("[data-pdf-load]").forEach((button) => {
+      button.addEventListener("click", () => initPdfViewer(viewer));
+    });
+  });
 </script>

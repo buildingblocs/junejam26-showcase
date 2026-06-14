@@ -1,5 +1,5 @@
 ---
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import Layout from "../../layouts/Layout.astro";
 import PdfDeckViewer from "../../components/PdfDeckViewer.astro";
@@ -16,6 +16,7 @@ export function getStaticPaths() {
 
 const { game } = Astro.props as { game: GameEntry };
 const asset = showcaseAssets[game.slug] ?? { sourceFiles: [] };
+const isPlayable = Boolean(asset.playUrl);
 const visibleLinks = game.links.filter((link) => {
   const href = link.href.toLowerCase();
   return !href.endsWith(".zip") && !href.endsWith(".pptx");
@@ -27,39 +28,43 @@ const tagClass = (tag: string) => {
   return "special";
 };
 
-const readPublicFile = (href: string) => {
-  const localPath = path.join(process.cwd(), "public", href.replace(/^\//, ""));
-  if (!existsSync(localPath)) return "Source file not found.";
-  return readFileSync(localPath, "utf8");
+const getSlideImages = (slidePdf?: string) => {
+  if (!slidePdf) return [];
+  const pdfPublicPath = path.join(process.cwd(), "public", slidePdf.replace(/^\//, ""));
+  const slideDir = path.dirname(pdfPublicPath);
+  if (!existsSync(slideDir)) return [];
+  return readdirSync(slideDir)
+    .filter((file) => /^slide-\d+\.(png|jpe?g)$/i.test(file))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .map((file) => `${path.posix.dirname(slidePdf)}/${file}`);
 };
 
-const sourcePreviews = asset.sourceFiles.map((file) => ({
-  ...file,
-  code: readPublicFile(file.href),
-}));
+const slideImages = getSlideImages(asset.slidePdf);
 
-const keyboardRows = asset.keyboardMode === "full"
-  ? [
-      ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
-      ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-      ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-      ["Z", "X", "C", "V", "B", "N", "M"],
-      ["ArrowLeft", "ArrowDown", "ArrowUp", "ArrowRight"],
-      ["Backspace", "Space", "Enter"],
-    ]
-  : asset.keyboardMode === "wasd"
-    ? [["W"], ["A", "S", "D"], ["Space", "Enter"]]
-    : [];
+const keyboardRows =
+  asset.keyboardMode === "full"
+    ? [
+        ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+        ["Z", "X", "C", "V", "B", "N", "M"],
+        ["ArrowLeft", "ArrowDown", "ArrowUp", "ArrowRight"],
+        ["Backspace", "Space", "Enter"],
+      ]
+    : asset.keyboardMode === "wasd"
+      ? [["W"], ["A", "S", "D"], ["Space", "Enter"]]
+      : [];
 
-const keyLabel = (key: string) => ({
-  ArrowLeft: "Left",
-  ArrowDown: "Down",
-  ArrowUp: "Up",
-  ArrowRight: "Right",
-  Backspace: "Bksp",
-  Space: "Space",
-  Enter: "Enter",
-}[key] ?? key);
+const keyLabel = (key: string) =>
+  ({
+    ArrowLeft: "Left",
+    ArrowDown: "Down",
+    ArrowUp: "Up",
+    ArrowRight: "Right",
+    Backspace: "Bksp",
+    Space: "Space",
+    Enter: "Enter",
+  })[key] ?? key;
 ---
 
 <Layout title={game.title} description={game.summary}>
@@ -76,6 +81,9 @@ const keyLabel = (key: string) => ({
         <div class="tag-row">
           <span class={`tag ${tagClass(game.track)}`}>{game.track}</span>
           {game.awards.map((award) => <span class={`tag ${tagClass(award)}`}>{award}</span>)}
+          <span class={`tag play-state ${isPlayable ? "playable" : "pending"}`}>
+            {isPlayable ? "Playable" : "Export pending"}
+          </span>
         </div>
         <p class="eyebrow">{game.teamCode} - {game.track}</p>
         <h1>{game.title}</h1>
@@ -83,29 +91,40 @@ const keyLabel = (key: string) => ({
       </div>
     </section>
 
-    <section class:list={["detail-body", asset.playUrl && "detail-body-playable"]}>
+    <section class:list={["detail-body", isPlayable && "detail-body-playable"]}>
       <article class="writeup">
         {game.writeup.split(/\n\s*\n/).map((paragraph) => <p>{paragraph}</p>)}
       </article>
 
       <aside class="side-panel">
         <section class="play-panel">
-          <p class="eyebrow">Play</p>
+          <div class="panel-heading-row">
+            <p class="eyebrow">Play</p>
+            <span class={`tag play-state ${isPlayable ? "playable" : "pending"}`}>
+              {isPlayable ? "Playable now" : "Export pending"}
+            </span>
+          </div>
+
           {
-            asset.playUrl ? (
+            isPlayable ? (
               <>
                 <iframe
                   class="play-embed"
                   data-play-embed
-                  src={withBase(asset.playUrl)}
+                  src={withBase(asset.playUrl!)}
                   title={`${game.title} playable build`}
                   loading="lazy"
                   allow="autoplay; fullscreen; gamepad"
                   sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-forms"
                 />
                 {keyboardRows.length > 0 && (
-                  <div class={`game-keyboard ${asset.keyboardMode === "full" ? "full-keyboard" : "wasd-keyboard"}`} data-game-keyboard>
-                    <button class="focus-game" type="button" data-focus-game>Focus game</button>
+                  <div
+                    class={`game-keyboard ${asset.keyboardMode === "full" ? "full-keyboard" : "wasd-keyboard"}`}
+                    data-game-keyboard
+                  >
+                    <button class="focus-game" type="button" data-focus-game>
+                      Focus game
+                    </button>
                     <div class="key-row-stack">
                       {keyboardRows.map((row) => (
                         <div class="key-row">
@@ -131,15 +150,21 @@ const keyLabel = (key: string) => ({
           }
         </section>
 
-        {visibleLinks.length > 0 && (
-          <section class="links-panel">
-            <p class="eyebrow">Files</p>
-            <h3>Slides and documents</h3>
-            <div class="link-list">
-              {visibleLinks.map((link) => <a class="mini-link" href={encodeURI(withBase(link.href))}>{link.label}</a>)}
-            </div>
-          </section>
-        )}
+        {
+          visibleLinks.length > 0 && (
+            <section class="links-panel">
+              <p class="eyebrow">Files</p>
+              <h3>Slides and documents</h3>
+              <div class="link-list">
+                {visibleLinks.map((link) => (
+                  <a class="mini-link" href={encodeURI(withBase(link.href))}>
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </section>
+          )
+        }
       </aside>
     </section>
 
@@ -148,9 +173,10 @@ const keyLabel = (key: string) => ({
         <p class="eyebrow">Slides</p>
         <h2>Presentation deck</h2>
       </div>
+
       {
         asset.slidePdf ? (
-          <PdfDeckViewer src={asset.slidePdf} title={`${game.title} presentation`} />
+          <PdfDeckViewer src={asset.slidePdf} title={`${game.title} presentation`} slideImages={slideImages} />
         ) : (
           <div class="empty-panel">
             <h3>PDF preview pending</h3>
@@ -165,11 +191,12 @@ const keyLabel = (key: string) => ({
         <p class="eyebrow">Source</p>
         <h2>Full source</h2>
       </div>
+
       {
-        sourcePreviews.length > 0 ? (
+        asset.sourceFiles.length > 0 ? (
           <div class="code-grid">
-            {sourcePreviews.map((file, index) => (
-              <details class="code-panel" open={index === 0}>
+            {asset.sourceFiles.map((file) => (
+              <details class="code-panel" data-source-card data-source-url={encodeURI(withBase(file.href))}>
                 <summary>
                   <div>
                     <p class="eyebrow">{file.language === "python" ? "Pygame" : "Unity C#"}</p>
@@ -180,14 +207,14 @@ const keyLabel = (key: string) => ({
                 <div class="source-link-row">
                   <a href={encodeURI(withBase(file.href))}>Open raw source</a>
                 </div>
-                <pre><code>{file.code}</code></pre>
+                <pre><code data-source-code>Open this card to load source.</code></pre>
               </details>
             ))}
           </div>
         ) : (
           <div class="empty-panel">
             <h3>Source preview pending</h3>
-            <p>No readable source file was matched for this entry yet.</p>
+            <p>No readable source file has been matched to this entry yet.</p>
           </div>
         )
       }
@@ -220,7 +247,6 @@ const keyLabel = (key: string) => ({
   const fireGameKey = (iframe, value, type) => {
     const targetWindow = iframe?.contentWindow;
     if (!targetWindow) return;
-
     const meta = getKeyMeta(value);
     const eventInit = {
       key: meta.key,
@@ -230,7 +256,6 @@ const keyLabel = (key: string) => ({
       bubbles: true,
       cancelable: true,
     };
-
     targetWindow.focus();
     targetWindow.dispatchEvent(new KeyboardEvent(type, eventInit));
     targetWindow.document?.dispatchEvent(new KeyboardEvent(type, eventInit));
@@ -254,6 +279,7 @@ const keyLabel = (key: string) => ({
         button.setPointerCapture?.(event.pointerId);
         fireGameKey(iframe, key, "keydown");
       };
+
       const release = (event) => {
         event.preventDefault();
         fireGameKey(iframe, key, "keyup");
@@ -263,6 +289,23 @@ const keyLabel = (key: string) => ({
       button.addEventListener("pointerup", release);
       button.addEventListener("pointercancel", release);
       button.addEventListener("pointerleave", release);
+    });
+  });
+
+  document.querySelectorAll("[data-source-card]").forEach((card) => {
+    card.addEventListener("toggle", async () => {
+      if (!card.open || card.dataset.loaded === "true") return;
+      const code = card.querySelector("[data-source-code]");
+      code.textContent = "Loading source...";
+      try {
+        const response = await fetch(card.dataset.sourceUrl);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        code.textContent = await response.text();
+        card.dataset.loaded = "true";
+      } catch (error) {
+        console.error(error);
+        code.textContent = "Source file could not be loaded.";
+      }
     });
   });
 </script>

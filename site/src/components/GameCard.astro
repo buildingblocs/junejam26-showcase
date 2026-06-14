@@ -1,8 +1,10 @@
 ---
 import type { GameEntry } from "../data/games";
+import { showcaseAssets } from "../data/showcaseAssets";
 import { withBase } from "../utils/paths";
 
 const { game } = Astro.props as { game: GameEntry };
+const isPlayable = Boolean(showcaseAssets[game.slug]?.playUrl);
 
 const tagClass = (tag: string) => {
   if (tag.includes("Winner") || tag.includes("Runner")) return "rank";
@@ -17,6 +19,9 @@ const tagClass = (tag: string) => {
     <div class="tag-row">
       <span class={`tag ${tagClass(game.track)}`}>{game.track}</span>
       {game.awards.map((award) => <span class={`tag ${tagClass(award)}`}>{award}</span>)}
+      <span class={`tag play-state ${isPlayable ? "playable" : "pending"}`}>
+        {isPlayable ? "Playable" : "Export pending"}
+      </span>
     </div>
     <h3>{game.title}</h3>
     <p>{game.summary}</p>
