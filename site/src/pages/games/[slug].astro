@@ -261,7 +261,20 @@ const keyLabel = (key: string) =>
     targetWindow.document?.dispatchEvent(new KeyboardEvent(type, eventInit));
   };
 
+  // Only show the on-screen keyboard on touch devices that have no physical
+  // keyboard (phones/tablets). On desktop the user has a real keyboard, so the
+  // on-screen keys are redundant clutter — hide them and let the game take key
+  // input directly once it's clicked/focused.
+  const isTouchDevice =
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
+    /Android|iPhone|iPod/i.test(navigator.userAgent);
+
   document.querySelectorAll("[data-game-keyboard]").forEach((keyboard) => {
+    if (!isTouchDevice) {
+      keyboard.style.display = "none";
+      return;
+    }
+
     const playPanel = keyboard.closest(".play-panel");
     const iframe = playPanel?.querySelector("[data-play-embed]");
 

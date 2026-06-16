@@ -16,3 +16,13 @@ __pycache__/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Hack Club CDN API key (local only)
+.cdn_key
+
+# CDN upload manifest (local working artifact)
+cdn-assets.json
+
+# Cloudflare R2 credentials (local only)
+.r2_creds
+r2-assets.json
