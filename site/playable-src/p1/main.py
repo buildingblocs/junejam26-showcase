@@ -1,3 +1,4 @@
+import asyncio
 import math
 import random
 import sys
@@ -495,6 +496,7 @@ async def main():
     player = None; speed = 5.0; obstacles, pages, powerups = [], [], []; spawn_t = 1.2; running = True; caught, intro = None, None 
 
     while running:
+        await asyncio.sleep(0)  # yield to the browser event loop each frame (pygbag)
         dt = min(0.04, max(0.001, CLOCK.tick(60) / 1000.0))
         mouse_c = False
         for e in pygame.event.get():

@@ -58,7 +58,7 @@ export const games: GameEntry[] = [
       },
     ],
     playNote:
-      "Pygame export pending: needs an exact pygbag or equivalent browser export from the recovered submitted source.",
+      "This entry has a confirmed browser export built from the recovered submitted Pygame source.",
   },
   {
     slug: "p26",
@@ -80,7 +80,7 @@ export const games: GameEntry[] = [
       },
     ],
     playNote:
-      "Pygame export pending: needs an exact pygbag or equivalent browser export from the submitted source.",
+      "This entry has a confirmed browser export from the submitted Pygame source.",
   },
   {
     slug: "u8",
@@ -102,7 +102,7 @@ export const games: GameEntry[] = [
       },
     ],
     playNote:
-      "Unity export pending: needs an exact Unity WebGL export from the submitted project.",
+      "This entry has a confirmed Unity WebGL export from the submitted project.",
   },
   {
     slug: "u4",
@@ -120,7 +120,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     links: [
     ],
     playNote:
-      "Unity export pending: needs an exact Unity WebGL export from the submitted project.",
+      "This entry has a confirmed Unity WebGL export from the submitted project.",
   },
   {
     slug: "u2",
@@ -138,7 +138,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     links: [
     ],
     playNote:
-      "Unity export pending: needs an exact Unity WebGL export from the submitted project.",
+      "This entry has a confirmed Unity WebGL export from the submitted project.",
   },
   {
     slug: "p17",
@@ -160,7 +160,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
       },
     ],
     playNote:
-      "Pygame export pending: needs an exact browser export from the submitted source. Multiplayer networking may also require a matching server deployment.",
+      "Browser build pending: BREACH is a real-time multiplayer game with an authoritative WebSocket server and three connected players, and has no single-player mode. A faithful in-browser build needs that live server hosted and matched players, so an exact embed is not possible as a static page yet. The full source and slides are available below.",
   },
   {
     slug: "u16",
@@ -178,7 +178,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     links: [
     ],
     playNote:
-      "Unity export pending: needs an exact Unity WebGL export from the submitted project.",
+      "This entry has a confirmed Unity WebGL export from the submitted project.",
   },
   {
     slug: "p14",
@@ -200,7 +200,7 @@ href: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines o
       },
     ],
     playNote:
-      "Pygame export pending: needs an exact pygbag or equivalent browser export from the submitted source.",
+      "This entry has a confirmed browser export from the submitted Pygame source.",
   },
   {
     slug: "p1",
@@ -226,7 +226,7 @@ href: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines o
       },
     ],
     playNote:
-      "Pygame export pending: needs an exact pygbag or equivalent browser export from the submitted source.",
+      "This entry has a confirmed browser export from the submitted Pygame source.",
   },
   {
     slug: "p8",
@@ -248,7 +248,7 @@ href: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines o
       },
     ],
     playNote:
-      "Pygame export pending: needs an exact pygbag or equivalent browser export from the submitted source.",
+      "This entry has a confirmed browser export from the submitted Pygame source.",
   },
   {
     slug: "u13",
@@ -266,7 +266,7 @@ href: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines o
     links: [
     ],
     playNote:
-      "Unity export pending: needs an exact Unity WebGL export from the submitted project.",
+      "This entry has a confirmed Unity WebGL export from the submitted project.",
   },
 ];
 

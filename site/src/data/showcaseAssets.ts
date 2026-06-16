@@ -28,6 +28,8 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
   },
   p15: {
     slidePdf: `${w}/P15 - Pygame Runner-up - Finding the Way Home/slides/p15 - Canva/P15 Game Jam Where The Path Used to Be.pdf`,
+    playUrl: "/play/p15/index.html",
+    keyboardMode: "full",
     sourceFiles: [
       {
         label: "main.py",
@@ -102,6 +104,8 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     ],
   },
   p26: {
+    playUrl: "/play/p26/index.html",
+    keyboardMode: "full",
     sourceFiles: [
       {
         label: "homebound.py",
@@ -217,6 +221,8 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
   },
   p14: {
     slidePdf: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines of code - p14 - Canva/Building Blocs Game Presentation slides.pdf`,
+    playUrl: "/play/p14/index.html",
+    keyboardMode: "full",
     sourceFiles: [
       {
         label: "FinalGame.py",
@@ -227,6 +233,8 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
   },
   p1: {
     slidePdf: `${w}/P1 - Sensory Overload - School Subway Surfers/slides/sensory overload - p1 - Canva/Our Pygame Journey with Krish, Hamilton, Rui Jie, and Aditya.pdf`,
+    playUrl: "/play/p1/index.html",
+    keyboardMode: "full",
     sourceFiles: [
       {
         label: "Schools Subway Surfers.py",
@@ -237,6 +245,8 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
   },
   p8: {
     slidePdf: `${w}/P8 - Most Silly - Bleach Rush/slides/most silly - p8 - Canva/Pygame_P8.pdf`,
+    playUrl: "/play/p8/index.html",
+    keyboardMode: "full",
     sourceFiles: [
       {
         label: "bleach_rush.py",

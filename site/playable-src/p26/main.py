@@ -109,6 +109,7 @@ async def main():
     # game loop
     running = True
     while running:
+        await asyncio.sleep(0)  # yield to the browser event loop each frame (pygbag)
         # update clock
         dt = clock.tick() / 1000
 
@@ -372,6 +373,7 @@ async def main():
                     game_result = None
                     minigame_running = True
                     while minigame_running:
+                        await asyncio.sleep(0)  # yield to the browser event loop each frame (pygbag)
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 minigame_running = False
