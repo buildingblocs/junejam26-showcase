@@ -160,7 +160,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
       },
     ],
     playNote:
-      "Browser build pending: BREACH is a real-time multiplayer game with an authoritative WebSocket server and three connected players, and has no single-player mode. A faithful in-browser build needs that live server hosted and matched players, so an exact embed is not possible as a static page yet. The full source and slides are available below.",
+      "Single-player browser build: BREACH is normally real-time multiplayer over a server, so this build runs the same game logic locally in the browser and fills the other two seats with bots (AVA and NOVA). You play one role against the AI \u2014 no server or other players needed.",
   },
   {
     slug: "u16",

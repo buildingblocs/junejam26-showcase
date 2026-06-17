@@ -183,6 +183,8 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
   },
   p17: {
     slidePdf: `${w}/P17 - CSIT Prize - BREACH/slides/csit prize - p17 - Canva/Breach.pdf`,
+    playUrl: "/play/p17/index.html",
+    keyboardMode: "full",
     sourceFiles: [
       {
         label: "client.py",
