@@ -55,9 +55,9 @@
       var loaderUrl = buildUrl + "/u13.loader.js";
       var config = {
         arguments: [],
-        dataUrl: "https://pub-be8869d68a2b4911bc34532d32ceb12b.r2.dev/play/u13/Build/u13.data",
+        dataUrl: buildUrl + "/u13.data",
         frameworkUrl: buildUrl + "/u13.framework.js",
-        codeUrl: "https://pub-be8869d68a2b4911bc34532d32ceb12b.r2.dev/play/u13/Build/u13.wasm",
+        codeUrl: buildUrl + "/u13.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "BuildingBloCS June Jam Demo 1",
@@ -104,9 +104,7 @@
 
       } else {
         // Desktop / iframe style: fit the canvas to the embedding container while
-        // preserving the game's aspect ratio. A fixed-size canvas inside a flexible
-        // iframe overflowed and threw off Unity's mouse-coordinate mapping, so clicks
-        // missed buttons. Fitting the canvas to the visible area fixes click targeting.
+        // preserving the game's aspect ratio so mouse-coordinate mapping lines up.
         config.matchWebGLToCanvasSize = true;
         var BASE_W = 960, BASE_H = 600;
         var fitCanvas = function () {

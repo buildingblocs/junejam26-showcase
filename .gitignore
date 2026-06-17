@@ -26,3 +26,4 @@ cdn-assets.json
 # Cloudflare R2 credentials (local only)
 .r2_creds
 r2-assets.json
+/site/playable-src/unity/build-out/
