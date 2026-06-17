@@ -1,0 +1,13 @@
+{
+  "u2.wasm": "https://cdn.hackclub.com/019ed3b5-a0e9-771d-9e15-38d499ec0b73/u2.wasm",
+  "u2.data": "https://cdn.hackclub.com/019ed3b5-bccc-7c80-8a47-b16d34e19085/u2.data",
+  "u4.wasm": "https://cdn.hackclub.com/019ed3b5-f345-7e47-a3fb-a7e3f226a76a/u4.wasm",
+  "u4.data": "https://cdn.hackclub.com/019ed3b6-16ef-79e7-9afe-335fd500046e/u4.data",
+  "u8.wasm.unityweb": "https://cdn.hackclub.com/019ed3b6-322e-7ff2-a6c9-429da2363db4/u8.wasm.unityweb",
+  "u8.data.unityweb.part00": "https://cdn.hackclub.com/019ed3b6-8d6f-77b1-aeef-9d032c9c409d/u8.data.unityweb.part00",
+  "u8.data.unityweb.part01": "https://cdn.hackclub.com/019ed3b6-e545-7fa1-94b8-ce6989b2c86e/u8.data.unityweb.part01",
+  "u13.wasm": "https://cdn.hackclub.com/019ed3b7-1c12-71ef-b743-e011720dadb9/u13.wasm",
+  "u13.data": "https://cdn.hackclub.com/019ed3b7-4bee-7dd1-8211-3e50d435c9f5/u13.data",
+  "u16.wasm": "https://cdn.hackclub.com/019ed3b7-8510-701a-ac40-ab382b0a8e87/u16.wasm",
+  "u16.data": "https://cdn.hackclub.com/019ed3b7-a395-7459-ac38-b782137043ed/u16.data"
+}
