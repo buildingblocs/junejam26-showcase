@@ -11,7 +11,11 @@ async def main():
     mixer.init()
 
     # configuration
-    screen = pygame.display.set_mode()
+    # pygbag needs an explicit canvas size; the original used a no-arg
+    # set_mode() (desktop fullscreen). 1280x720 matches the game's hardcoded
+    # layout coordinates. Without an explicit size the browser canvas stays
+    # blank (black screen) while the loop and audio keep running.
+    screen = pygame.display.set_mode((1280, 720))
     pygame.display.set_caption('Homebound')
 
     # load images

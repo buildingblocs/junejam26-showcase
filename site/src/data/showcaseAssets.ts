@@ -104,6 +104,7 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     ],
   },
   p26: {
+    slidePdf: `${w}/P26 - Pygame Second Runner-up - Homebound/slides/provided/slides.pdf`,
     playUrl: "/play/p26/index.html",
     keyboardMode: "full",
     sourceFiles: [
@@ -137,6 +138,7 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     ],
   },
   u4: {
+    slidePdf: `${w}/U4 - Unity Runner-up - 5 More Minutes/slides/provided/slides.pdf`,
     playUrl: "/play/u4/index.html",
     keyboardMode: "full",
     sourceFiles: [
@@ -158,6 +160,7 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     ],
   },
   u2: {
+    slidePdf: `${w}/U2 - Unity Second Runner-up + Best Art - Taking OUT the Trash/slides/provided/slides.pdf`,
     playUrl: "/play/u2/index.html",
     keyboardMode: "full",
     sourceFiles: [
@@ -199,6 +202,7 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     ],
   },
   u16: {
+    slidePdf: `${w}/U16 - Most Original Concept - A Day in the Life of a Blind Person/slides/provided/slides.pdf`,
     playUrl: "/play/u16/index.html",
     keyboardMode: "full",
     sourceFiles: [
@@ -256,6 +260,7 @@ export const showcaseAssets: Record<string, ShowcaseAsset> = {
     ],
   },
   u13: {
+    slidePdf: `${w}/U13 - Most Overengineered - TinyExplorer/slides/provided/slides.pdf`,
     playUrl: "/play/u13/index.html",
     keyboardMode: "full",
     sourceFiles: [

@@ -375,7 +375,10 @@ h3 {
   gap: 18px;
 }
 
-.detail-body-playable .side-panel {
+/* Keep the description (writeup) above the game embed for playable entries:
+   the writeup already comes first in the DOM, so the side-panel (game) is no
+   longer reordered ahead of it. */
+.detail-body-playable .writeup {
   order: -1;
 }
 
