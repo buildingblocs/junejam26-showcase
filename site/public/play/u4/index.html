@@ -71,8 +71,6 @@
         // },
       };
 
-      // Cap render resolution at CSS pixels regardless of devicePixelRatio
-      // (HiDPI/Retina would otherwise render at 2x and hurt the frame rate).
       config.devicePixelRatio = 1;
 
       // By default, Unity keeps WebGL canvas render target size matched with
@@ -107,8 +105,6 @@
 
 
       } else {
-        // Desktop / iframe style: fit the canvas to the embedding container while
-        // preserving the game's aspect ratio so mouse-coordinate mapping lines up.
         config.matchWebGLToCanvasSize = true;
         var BASE_W = 960, BASE_H = 600;
         var fitCanvas = function () {
@@ -116,8 +112,7 @@
           canvas.style.width = Math.round(BASE_W * scale) + "px";
           canvas.style.height = Math.round(BASE_H * scale) + "px";
         };
-        fitCanvas();
-        window.addEventListener("resize", fitCanvas);
+        fitCanvas(); window.addEventListener("resize", fitCanvas);
       }
 
       document.querySelector("#unity-loading-bar").style.display = "block";
