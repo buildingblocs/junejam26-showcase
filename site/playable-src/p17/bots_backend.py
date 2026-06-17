@@ -88,10 +88,12 @@ class BotBrain:
     walks to terminals and solves their challenges (it can read the correct
     answer straight from the in-process game state)."""
 
-    def __init__(self, player_id, sock, name):
+    def __init__(self, player_id, sock, name, human_id, order=0):
         self.pid = player_id
         self.sock = sock
         self.name = name
+        self.human_id = human_id
+        self.order = order
         self._target = None
         self._retarget_at = 0.0
 
@@ -113,10 +115,20 @@ class BotBrain:
         return random.choice(SPECIALTIES)
 
     async def run(self):
-        # Give the human a head start to enter a name / pick a specialty.
         await asyncio.sleep(1.5)
         await self._send({"type": "join", "name": self.name})
-        await asyncio.sleep(1.5)
+        # Let the human pick a specialty first so they always get the one they
+        # want; only choose once they've picked (or after a patient timeout).
+        waited = 0.0
+        while waited < 12.0:
+            await asyncio.sleep(0.5)
+            waited += 0.5
+            if server.game_status != "lobby":
+                break
+            human = server.players.get(self.human_id)
+            if human and human.get("specialty"):
+                break
+        await asyncio.sleep(0.4 + 0.4 * self.order)  # stagger the two bots
         await self._send({"type": "select_role", "role": self._available_specialty()})
         await asyncio.sleep(0.6)
         await self._send({"type": "ready", "ready": True})
@@ -195,10 +207,10 @@ class LocalBackend:
         self.incoming.put({"type": "connection", "connected": True})
 
         bots = []
-        for name in ("AVA (bot)", "NOVA (bot)"):
+        for order, name in enumerate(("AVA (bot)", "NOVA (bot)")):
             sock = BotSock()
             bot_id = await register_player(sock)
-            bots.append(BotBrain(bot_id, sock, name))
+            bots.append(BotBrain(bot_id, sock, name, self._human_id, order))
 
         asyncio.ensure_future(server.broadcast_loop())
         asyncio.ensure_future(self._drain_human())

@@ -17,6 +17,24 @@ export function getStaticPaths() {
 const { game } = Astro.props as { game: GameEntry };
 const asset = showcaseAssets[game.slug] ?? { sourceFiles: [] };
 const isPlayable = Boolean(asset.playUrl);
+
+// Rough download size of each playable build, shown on the click-to-load poster
+// so visitors aren't surprised by a large fetch (Unity numbers are wasm + data).
+const playSize: Record<string, string> = {
+  u8: "~180 MB", u13: "~85 MB", u4: "~75 MB", u2: "~70 MB", u16: "~70 MB",
+  p26: "~15 MB", p17: "~10 MB", p1: "~10 MB", p6: "~10 MB",
+  p8: "~10 MB", p14: "~10 MB", p15: "~10 MB",
+};
+// Short control hints, only for builds whose controls were confirmed.
+const playControls: Record<string, string> = {
+  p17: "Move WASD / arrows · Interact E · Pick specialty 1 / 2 / 3 · Ready Space",
+  p8: "Advance / attack W · Special 1 · Heal 2 · Skip cutscene Space",
+  p15: "Press Enter or click to advance",
+  p26: "Click the on-screen buttons with the mouse",
+  u4: "Move WASD · Look with the mouse · Click to interact",
+};
+const sizeLabel = playSize[game.slug] ?? "";
+const controlsHint = playControls[game.slug] ?? "";
 const visibleLinks = game.links.filter((link) => {
   const href = link.href.toLowerCase();
   return !href.endsWith(".zip") && !href.endsWith(".pptx");
@@ -108,19 +126,43 @@ const keyLabel = (key: string) =>
           {
             isPlayable ? (
               <>
-                <iframe
-                  class="play-embed"
-                  data-play-embed
-                  src={withBase(asset.playUrl!)}
-                  title={`${game.title} playable build`}
-                  loading="lazy"
-                  allow="autoplay; fullscreen; gamepad"
-                  sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-forms"
-                />
+                <div class="play-embed-wrap" data-embed-wrap>
+                  <iframe
+                    class="play-embed"
+                    data-play-embed
+                    data-src={withBase(asset.playUrl!)}
+                    title={`${game.title} playable build`}
+                    loading="lazy"
+                    allow="autoplay; fullscreen; gamepad"
+                    sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-forms"
+                  />
+                  <button
+                    class="play-loader"
+                    type="button"
+                    data-play-loader
+                    style={`background-image: linear-gradient(rgba(2, 6, 23, 0.55), rgba(2, 6, 23, 0.82)), url(${withBase(game.cover)})`}
+                  >
+                    <span class="play-loader-icon" aria-hidden="true">▶</span>
+                    <span class="play-loader-label">Play {game.title}</span>
+                    <span class="play-loader-size">
+                      Tap to load the build{sizeLabel ? ` · ${sizeLabel}` : ""}
+                    </span>
+                  </button>
+                  <button class="embed-fullscreen" type="button" data-embed-fullscreen title="Fullscreen" hidden>
+                    ⛶
+                  </button>
+                </div>
+                {controlsHint && (
+                  <p class="play-controls">
+                    <strong>Controls</strong>
+                    <span>{controlsHint}</span>
+                  </p>
+                )}
                 {keyboardRows.length > 0 && (
                   <div
                     class={`game-keyboard ${asset.keyboardMode === "full" ? "full-keyboard" : "wasd-keyboard"}`}
                     data-game-keyboard
+                    hidden
                   >
                     <button class="focus-game" type="button" data-focus-game>
                       Focus game
@@ -268,6 +310,37 @@ const keyLabel = (key: string) =>
   const isTouchDevice =
     window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
     /Android|iPhone|iPod/i.test(navigator.userAgent);
+
+  // Click-to-load: the heavy game build is only fetched once the visitor asks,
+  // so just reading the write-up or slides doesn't download tens of MB.
+  document.querySelectorAll("[data-embed-wrap]").forEach((wrap) => {
+    const iframe = wrap.querySelector("[data-play-embed]");
+    const loader = wrap.querySelector("[data-play-loader]");
+    const fullscreenButton = wrap.querySelector("[data-embed-fullscreen]");
+    const panel = wrap.closest(".play-panel");
+    const keyboard = panel?.querySelector("[data-game-keyboard]");
+
+    loader?.addEventListener("click", () => {
+      if (iframe && iframe.dataset.src && !iframe.src) {
+        iframe.src = iframe.dataset.src;
+      }
+      wrap.classList.add("is-loaded");
+      if (fullscreenButton) fullscreenButton.hidden = false;
+      if (keyboard && isTouchDevice) keyboard.hidden = false;
+      window.setTimeout(() => {
+        iframe?.focus();
+        iframe?.contentWindow?.focus();
+      }, 150);
+    });
+
+    fullscreenButton?.addEventListener("click", () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen?.();
+      } else {
+        wrap.requestFullscreen?.();
+      }
+    });
+  });
 
   document.querySelectorAll("[data-game-keyboard]").forEach((keyboard) => {
     if (!isTouchDevice) {
