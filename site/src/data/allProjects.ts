@@ -344,6 +344,7 @@ const unity: DirectoryEntry[] = [
       "Exhausted and juggling exams, the team started with a casual Block Blast-style puzzle and, in a late-night spark, turned it into a roguelike RPG. A constant boss countdown makes the puzzle feel real-time: place blocks too slowly and the boss attacks, while clearing lines triggers combo counters.",
     slides: "https://docs.google.com/presentation/d/1fZOvBt5fgupj7JSgRxNYY8sx7RktNfh_ipito94A9Bk/edit?usp=sharing",
     source: "https://drive.google.com/drive/folders/1zU1B4Z4PcuRRdtk0ZeVc1emOH8hbWWUt?usp=sharing",
+    playSlug: "u7a",
   },
   {
     id: "u7b",
