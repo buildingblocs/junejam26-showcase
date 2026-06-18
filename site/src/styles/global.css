@@ -899,6 +899,12 @@ h3 {
   font-size: 13px;
 }
 
+.project-links .mini-link.play {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #111827;
+}
+
 @media (max-width: 900px) {
   .project-grid {
     grid-template-columns: 1fr 1fr;

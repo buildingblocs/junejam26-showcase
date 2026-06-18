@@ -15,6 +15,7 @@ export type DirectoryEntry = {
   slides?: string;       // slides / presentation link
   source?: string;       // source code or download link
   doc?: string;          // separate write-up document, where one was submitted
+  playSlug?: string;     // when a browser build exists, its /play/<slug>/ folder
 };
 
 // Pygame entries (excluding showcased P1, P6, P8, P14, P15, P17, P26).
@@ -68,6 +69,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "A Crossy Road–style game about the dangers of jaywalking.",
     slides: "https://1drv.ms/p/c/ca4d6a21190140e7/IQA8kfbA89FVQ671Otv43N5uAUpS4951atgufT6CwgIS0rg?e=CMBA70",
     source: "https://github.com/Eng-Kai-Yang/PyGame_P10",
+    playSlug: "p10",
   },
   {
     id: "p12",

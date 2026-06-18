@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import GameCard from "../components/GameCard.astro";
 import { rankedGames, specialGames } from "../data/games";
 import { otherProjects } from "../data/allProjects";
+import { withBase } from "../utils/paths";
 
 const showcased = [...rankedGames, ...specialGames];
 
@@ -55,11 +56,17 @@ const sourceLabel = (url: string) => {
             <div class="tag-row">
               <span class="tag track">{project.track}</span>
               <span class="tag code">{project.code}</span>
+              {project.playSlug && <span class="tag play-state playable">Playable</span>}
             </div>
             <h3>{project.title || project.blurb}</h3>
             {project.title && <p class="project-blurb">{project.blurb}</p>}
             <p class="project-team">{project.team}</p>
             <div class="project-links">
+              {project.playSlug && (
+                <a class="mini-link play" href={withBase(`/play/${project.playSlug}/index.html`)}>
+                  ▶ Play
+                </a>
+              )}
               {project.slides && (
                 <a class="mini-link" href={project.slides} target="_blank" rel="noopener noreferrer">
                   Slides
