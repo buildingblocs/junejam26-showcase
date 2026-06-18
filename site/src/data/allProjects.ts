@@ -244,6 +244,7 @@ const unity: DirectoryEntry[] = [
     blurb: "A paper character transforms into a ball or plane to platform.",
     slides: "https://www.icloud.com/keynote/0115tZWaTGrmW_BQgsFH2-eLg",
     source: "https://github.com/tunghongjiang-sys1/U1-GameJam2026-2026-06-10_10-00-36",
+    playSlug: "u1",
   },
   {
     id: "u3",
