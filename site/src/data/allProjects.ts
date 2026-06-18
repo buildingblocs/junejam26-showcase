@@ -378,13 +378,14 @@ const unity: DirectoryEntry[] = [
     id: "u11",
     code: "U11",
     track: "Unity",
-    title: "",
+    title: "Cup game",
     team: "Mohamed Areeq Bin Mohamed Ashraf, Poh Jun Zhe Matthew, Emerald Alin Eain, Lu Yanjun",
     blurb: "A Unity game dreamed up over a cup of Milo.",
     writeup:
       "Dreamed up over a cup of Milo, the team built their first Unity game while all of them were still learning C#. They overcame time, skill, and experience gaps by collaborating and each contributing what they could.",
     slides: "https://docs.google.com/presentation/d/12f6U52jRNBCplCPaIN8TL_l_0ZTiZ5BwQMv2lYQFGrE/edit?usp=sharing",
     source: "https://github.com/PohJunZheMatthew/June_Jam_Competition_U11",
+    playSlug: "u11",
   },
   {
     id: "u12",
