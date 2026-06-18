@@ -811,3 +811,102 @@ h3 {
     min-height: 420px;
   }
 }
+
+/* Shared lead paragraph used on the all-projects and home view-all blocks. */
+.lede {
+  max-width: 640px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+/* Home page: "View all projects" call-to-action at the bottom. */
+.view-all {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin: 8px 0 24px;
+  padding: 52px 24px 60px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  text-align: center;
+}
+
+.view-all .lede {
+  margin-top: 4px;
+}
+
+.view-all .button {
+  margin-top: 18px;
+}
+
+/* All-projects page: compact directory of every other entry. */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.76);
+  box-shadow: var(--shadow);
+}
+
+.project-card h3 {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.tag.code {
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.36);
+  color: #dbe4ef;
+}
+
+.project-blurb {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.project-team {
+  margin: 2px 0 0;
+  color: var(--subtle);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.project-links .mini-link {
+  min-height: 36px;
+  padding: 7px 12px;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .project-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}

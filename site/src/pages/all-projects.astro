@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GameCard from "../components/GameCard.astro";
+import { rankedGames, specialGames } from "../data/games";
+import { otherProjects } from "../data/allProjects";
+
+const showcased = [...rankedGames, ...specialGames];
+
+// Label a link by its host so the button reads sensibly (GitHub vs Drive etc.).
+const sourceLabel = (url: string) => {
+  if (url.includes("github.com")) return "GitHub repo";
+  if (url.includes("drive.google.com")) return "Google Drive";
+  if (url.includes("1drv.ms") || url.includes("onedrive")) return "OneDrive";
+  if (url.includes("icloud.com")) return "iCloud";
+  return "Download";
+};
+---
+
+<Layout
+  title="All Projects"
+  description="Every BuildingBloCS June Jam 2026 entry — winners and all other teams, with slides and source downloads."
+>
+  <main class="container">
+    <section class="section-block compact" style="padding-top:48px;">
+      <p class="eyebrow">BuildingBloCS June Jam 2026</p>
+      <h1>All projects</h1>
+      <p class="lede">
+        Every team that entered the jam. The award winners are showcased up top with
+        playable browser builds; below them is the full directory of entries, each
+        linking out to the team's own slides and source.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href={`${import.meta.env.BASE_URL}`}>Back to showcase</a>
+      </div>
+    </section>
+
+    <section id="winners" class="section-block">
+      <div class="section-heading">
+        <p class="eyebrow">Award Winners</p>
+        <h2>Showcased &amp; playable</h2>
+      </div>
+      <div class="game-grid">
+        {showcased.map((game) => <GameCard game={game} />)}
+      </div>
+    </section>
+
+    <section id="entries" class="section-block">
+      <div class="section-heading">
+        <p class="eyebrow">The Full Field</p>
+        <h2>All other entries</h2>
+      </div>
+      <div class="project-grid">
+        {otherProjects.map((project) => (
+          <article class="project-card">
+            <div class="tag-row">
+              <span class="tag track">{project.track}</span>
+              <span class="tag code">{project.code}</span>
+            </div>
+            <h3>{project.title || project.blurb}</h3>
+            {project.title && <p class="project-blurb">{project.blurb}</p>}
+            <p class="project-team">{project.team}</p>
+            <div class="project-links">
+              {project.slides && (
+                <a class="mini-link" href={project.slides} target="_blank" rel="noopener noreferrer">
+                  Slides
+                </a>
+              )}
+              {project.source && (
+                <a class="mini-link" href={project.source} target="_blank" rel="noopener noreferrer">
+                  {sourceLabel(project.source)}
+                </a>
+              )}
+              {project.doc && (
+                <a class="mini-link" href={project.doc} target="_blank" rel="noopener noreferrer">
+                  Write-up
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

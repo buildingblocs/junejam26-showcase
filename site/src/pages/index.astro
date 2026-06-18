@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import GameCard from "../components/GameCard.astro";
 import { rankedGames, specialGames } from "../data/games";
+import { withBase } from "../utils/paths";
 ---
 
 <Layout title="June Jam Game Showcase" description="BuildingBloCS June Jam 2026 winners and special prize showcase.">
@@ -35,6 +36,16 @@ import { rankedGames, specialGames } from "../data/games";
       <div class="game-grid">
         {specialGames.map((game) => <GameCard game={game} />)}
       </div>
+    </section>
+
+    <section class="view-all">
+      <p class="eyebrow">Beyond the winners</p>
+      <h2>See what everyone built</h2>
+      <p class="lede">
+        Browse the full field of June Jam 2026 entries, with slides and source
+        for every team.
+      </p>
+      <a class="button primary" href={withBase("/all-projects/")}>View all projects</a>
     </section>
 
   </main>
