@@ -50,6 +50,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "Answer math questions to grow a colourful virtual garden.",
     slides: "https://canva.link/68152ngqpgta5fh",
     source: "https://drive.google.com/drive/u/1/folders/1NhRVPMhYZxIgCa3sFOi3mLId2-xyjK8D?q=sharedwith:public%20parent:1NhRVPMhYZxIgCa3sFOi3mLId2-xyjK8D",
+    playSlug: "p5",
   },
   {
     id: "p9",
@@ -82,6 +83,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "Overcooked-style post-meal cleanup against the clock.",
     slides: "https://canva.link/ztamrdw310wbxhm",
     source: "https://github.com/90winner09-dotcom/Pygame_P12/tree/main",
+    playSlug: "p12",
   },
   {
     id: "p13",
@@ -281,16 +283,6 @@ const unity: DirectoryEntry[] = [
     blurb: "A block-puzzle RPG where clearing lines battles a boss.",
     slides: "https://docs.google.com/presentation/d/1fZOvBt5fgupj7JSgRxNYY8sx7RktNfh_ipito94A9Bk/edit?usp=sharing",
     source: "https://drive.google.com/drive/folders/1zU1B4Z4PcuRRdtk0ZeVc1emOH8hbWWUt?usp=sharing",
-  },
-  {
-    id: "u7b",
-    code: "U7b",
-    track: "Unity",
-    title: "",
-    team: "Ng Chee Yong",
-    blurb: "Get characters with different lives ready for the day.",
-    slides: "https://docs.google.com/presentation/d/1Zk5Jpv2ot5BhM1t5UezZ45-yBvf_WE8_AYGCoPJM_gc/edit?usp=sharing",
-    source: "https://github.com/SilverArrowARS3719/Pygame_14",
   },
   {
     id: "u9",
