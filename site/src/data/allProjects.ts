@@ -453,13 +453,14 @@ const unity: DirectoryEntry[] = [
     id: "u18",
     code: "U18",
     track: "Unity",
-    title: "",
+    title: "System Fault",
     team: "Leonard Tan Jun Quan",
     blurb: "A 2D escape room that teaches how an attacker thinks.",
     writeup:
       "Originally a penetration-tester simulator, the solo developer pivoted to a 2D escape room that teaches how an attacker thinks: gather info about a 'box', exploit it, and repeat until you capture the machine. Fresh from Roblox and Godot, he cut features that would not fit 48 hours and focused on scalable systems he could extend later.",
     slides: "https://1drv.ms/p/c/16AB706070C9421F/IQANp3q8YV57Srdb973w4He0AetXjDgGVYKxtTrjMTZ6AhA?e=E7gPeC",
     source: "https://drive.google.com/file/d/1zzug99FBrEFrKe4aZKWIhFak-wCO1bIP/view?usp=sharing",
+    playSlug: "u18",
   },
 ];
 
