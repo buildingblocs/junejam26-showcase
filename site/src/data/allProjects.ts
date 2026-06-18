@@ -274,6 +274,7 @@ const unity: DirectoryEntry[] = [
     blurb: "A magic paintbrush restores colour and hidden memories.",
     slides: "https://docs.google.com/presentation/d/1a_v-ZHaeqEhLahwTRQUccM5202tEo3fzwn7bsnstfz4/edit?usp=drivesdk",
     source: "https://drive.google.com/file/d/15hNg4ZCGsMx-MLQfz2Br8kf5dFVupUPJ/view?usp=sharing",
+    playSlug: "u6",
   },
   {
     id: "u7a",
