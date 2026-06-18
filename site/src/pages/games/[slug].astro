@@ -3,27 +3,95 @@ import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import Layout from "../../layouts/Layout.astro";
 import PdfDeckViewer from "../../components/PdfDeckViewer.astro";
-import { games, type GameEntry } from "../../data/games";
+import { games } from "../../data/games";
 import { showcaseAssets } from "../../data/showcaseAssets";
+import { otherProjects } from "../../data/allProjects";
 import { withBase } from "../../utils/paths";
 
 export function getStaticPaths() {
-  return games.map((game) => ({
-    params: { slug: game.slug },
-    props: { game },
-  }));
+  // Label a source link by its host so the button reads sensibly. Defined inside
+  // getStaticPaths because Astro runs it in isolation from module scope.
+  const sourceLabel = (url: string) => {
+    if (url.includes("github.com")) return "GitHub repo";
+    if (url.includes("drive.google.com")) return "Google Drive";
+    if (url.includes("1drv.ms") || url.includes("onedrive")) return "OneDrive";
+    if (url.includes("icloud.com")) return "iCloud";
+    return "Download";
+  };
+  // Winners: full data (cover art, local slide PDF + source preview).
+  const winnerEntries = games.map((game) => {
+    const asset = showcaseAssets[game.slug] ?? { sourceFiles: [] };
+    return {
+      params: { slug: game.slug },
+      props: {
+        entry: {
+          slug: game.slug,
+          title: game.title,
+          team: game.team,
+          track: game.track,
+          code: game.teamCode,
+          awards: game.awards,
+          summary: game.summary,
+          writeup: game.writeup,
+          cover: game.cover,
+          playUrl: asset.playUrl ?? null,
+          keyboardMode: asset.keyboardMode ?? null,
+          slidePdf: asset.slidePdf ?? null,
+          sourceFiles: asset.sourceFiles ?? [],
+          links: game.links.map((l) => ({ label: l.label, href: l.href, external: false })),
+          isWinner: true,
+        },
+      },
+    };
+  });
+
+  // Every other entry: same page shape, but cover is a generated gradient,
+  // slides/source link out to the team's own files, and the playable build
+  // (if any) embeds the same way.
+  const restEntries = otherProjects.map((p) => {
+    const links = [];
+    if (p.slides) links.push({ label: "Slides", href: p.slides, external: true });
+    if (p.source) links.push({ label: sourceLabel(p.source), href: p.source, external: true });
+    if (p.doc) links.push({ label: "Write-up doc", href: p.doc, external: true });
+    return {
+      params: { slug: p.id },
+      props: {
+        entry: {
+          slug: p.id,
+          title: p.title || p.code,
+          team: p.team,
+          track: p.track,
+          code: p.code,
+          awards: [],
+          summary: p.blurb,
+          writeup: p.writeup ?? p.blurb,
+          cover: null,
+          playUrl: p.playSlug ? `/play/${p.playSlug}/index.html` : null,
+          keyboardMode: p.playSlug && p.track === "Pygame" ? "full" : null,
+          slidePdf: null,
+          sourceFiles: [],
+          links,
+          isWinner: false,
+        },
+      },
+    };
+  });
+
+  return [...winnerEntries, ...restEntries];
 }
 
-const { game } = Astro.props as { game: GameEntry };
-const asset = showcaseAssets[game.slug] ?? { sourceFiles: [] };
-const isPlayable = Boolean(asset.playUrl);
+const { entry } = Astro.props as { entry: any };
+const isPlayable = Boolean(entry.playUrl);
 
 // Rough download size of each playable build, shown on the click-to-load poster
 // so visitors aren't surprised by a large fetch (Unity numbers are wasm + data).
 const playSize: Record<string, string> = {
   u8: "~180 MB", u13: "~85 MB", u4: "~75 MB", u2: "~70 MB", u16: "~70 MB",
-  p26: "~15 MB", p17: "~10 MB", p1: "~10 MB", p6: "~10 MB",
-  p8: "~10 MB", p14: "~10 MB", p15: "~10 MB",
+  u6: "~70 MB", u1: "~30 MB", u14: "~12 MB", u15a: "~23 MB",
+  p26: "~15 MB", p17: "~10 MB", p1: "~10 MB", p6: "~10 MB", p8: "~10 MB",
+  p14: "~10 MB", p15: "~10 MB", p3: "~14 MB", p23: "~14 MB", p12: "~15 MB",
+  p5: "~10 MB", p9: "~10 MB", p10: "~10 MB", p16: "~10 MB", p20: "~10 MB",
+  p22: "~10 MB", p29: "~10 MB", p33: "~10 MB", u10: "~10 MB",
 };
 // Short control hints, only for builds whose controls were confirmed.
 const playControls: Record<string, string> = {
@@ -32,13 +100,11 @@ const playControls: Record<string, string> = {
   p15: "Press Enter or click to advance",
   p26: "Click the on-screen buttons with the mouse",
   u4: "Move WASD · Look with the mouse · Click to interact",
+  p10: "Move with WASD / arrows · pause Space or Esc",
+  p5: "Click the answer buttons with the mouse",
 };
-const sizeLabel = playSize[game.slug] ?? "";
-const controlsHint = playControls[game.slug] ?? "";
-const visibleLinks = game.links.filter((link) => {
-  const href = link.href.toLowerCase();
-  return !href.endsWith(".zip") && !href.endsWith(".pptx");
-});
+const sizeLabel = playSize[entry.slug] ?? "";
+const controlsHint = playControls[entry.slug] ?? "";
 
 const tagClass = (tag: string) => {
   if (tag.includes("Winner") || tag.includes("Runner")) return "rank";
@@ -46,7 +112,7 @@ const tagClass = (tag: string) => {
   return "special";
 };
 
-const getSlideImages = (slidePdf?: string) => {
+const getSlideImages = (slidePdf?: string | null) => {
   if (!slidePdf) return [];
   const pdfPublicPath = path.join(process.cwd(), "public", slidePdf.replace(/^\//, ""));
   const slideDir = path.dirname(pdfPublicPath);
@@ -57,10 +123,10 @@ const getSlideImages = (slidePdf?: string) => {
     .map((file) => `${path.posix.dirname(slidePdf)}/${file}`);
 };
 
-const slideImages = getSlideImages(asset.slidePdf);
+const slideImages = getSlideImages(entry.slidePdf);
 
 const keyboardRows =
-  asset.keyboardMode === "full"
+  entry.keyboardMode === "full"
     ? [
         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -69,7 +135,7 @@ const keyboardRows =
         ["ArrowLeft", "ArrowDown", "ArrowUp", "ArrowRight"],
         ["Backspace", "Space", "Enter"],
       ]
-    : asset.keyboardMode === "wasd"
+    : entry.keyboardMode === "wasd"
       ? [["W"], ["A", "S", "D"], ["Space", "Enter"]]
       : [];
 
@@ -83,35 +149,45 @@ const keyLabel = (key: string) =>
     Space: "Space",
     Enter: "Enter",
   })[key] ?? key;
+
+// Cover: winners have art; everyone else gets a themed gradient + title.
+const coverBg = entry.cover
+  ? `linear-gradient(rgba(2, 6, 23, 0.55), rgba(2, 6, 23, 0.82)), url(${withBase(entry.cover)})`
+  : entry.track === "Unity"
+    ? "linear-gradient(150deg, #0b2540 0%, #07112f 60%, #020617 100%)"
+    : "linear-gradient(150deg, #3a1d4d 0%, #1a1033 55%, #020617 100%)";
+
+const backHref = entry.isWinner ? withBase("/") : withBase("/all-projects/");
+const backLabel = entry.isWinner ? "Back to showcase" : "Back to all projects";
 ---
 
-<Layout title={game.title} description={game.summary}>
+<Layout title={entry.title} description={entry.summary}>
   <main class="container">
     <section class="section-block compact">
-      <a class="button" href={withBase("/")}>Back to showcase</a>
+      <a class="button" href={backHref}>{backLabel}</a>
     </section>
 
     <section class="detail-hero">
-      <div class="detail-media">
-        <img src={withBase(game.cover)} alt="" />
+      <div class:list={["detail-media", !entry.cover && "detail-media-fallback"]} style={!entry.cover ? `background:${coverBg}` : undefined}>
+        {entry.cover ? <img src={withBase(entry.cover)} alt="" /> : <span class="cover-fallback">{entry.title}</span>}
       </div>
       <div class="detail-copy">
         <div class="tag-row">
-          <span class={`tag ${tagClass(game.track)}`}>{game.track}</span>
-          {game.awards.map((award) => <span class={`tag ${tagClass(award)}`}>{award}</span>)}
+          <span class={`tag ${tagClass(entry.track)}`}>{entry.track}</span>
+          {entry.awards.map((award: string) => <span class={`tag ${tagClass(award)}`}>{award}</span>)}
           <span class={`tag play-state ${isPlayable ? "playable" : "pending"}`}>
-            {isPlayable ? "Playable" : "Export pending"}
+            {isPlayable ? "Playable" : "Not playable"}
           </span>
         </div>
-        <p class="eyebrow">{game.teamCode} - {game.track}</p>
-        <h1>{game.title}</h1>
-        <p class="team">{game.team}</p>
+        <p class="eyebrow">{entry.code} - {entry.track}</p>
+        <h1>{entry.title}</h1>
+        <p class="team">{entry.team}</p>
       </div>
     </section>
 
     <section class:list={["detail-body", isPlayable && "detail-body-playable"]}>
       <article class="writeup">
-        {game.writeup.split(/\n\s*\n/).map((paragraph) => <p>{paragraph}</p>)}
+        {entry.writeup.split(/\n\s*\n/).map((paragraph: string) => <p>{paragraph}</p>)}
       </article>
 
       <aside class="side-panel">
@@ -119,7 +195,7 @@ const keyLabel = (key: string) =>
           <div class="panel-heading-row">
             <p class="eyebrow">Play</p>
             <span class={`tag play-state ${isPlayable ? "playable" : "pending"}`}>
-              {isPlayable ? "Playable now" : "Export pending"}
+              {isPlayable ? "Playable now" : "Not playable"}
             </span>
           </div>
 
@@ -130,8 +206,8 @@ const keyLabel = (key: string) =>
                   <iframe
                     class="play-embed"
                     data-play-embed
-                    data-src={withBase(asset.playUrl!)}
-                    title={`${game.title} playable build`}
+                    data-src={withBase(entry.playUrl)}
+                    title={`${entry.title} playable build`}
                     loading="lazy"
                     allow="autoplay; fullscreen; gamepad"
                     sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-forms"
@@ -140,10 +216,10 @@ const keyLabel = (key: string) =>
                     class="play-loader"
                     type="button"
                     data-play-loader
-                    style={`background-image: linear-gradient(rgba(2, 6, 23, 0.55), rgba(2, 6, 23, 0.82)), url(${withBase(game.cover)})`}
+                    style={`background-image: ${coverBg}`}
                   >
                     <span class="play-loader-icon" aria-hidden="true">▶</span>
-                    <span class="play-loader-label">Play {game.title}</span>
+                    <span class="play-loader-label">Play {entry.title}</span>
                     <span class="play-loader-size">
                       Tap to load the build{sizeLabel ? ` · ${sizeLabel}` : ""}
                     </span>
@@ -160,7 +236,7 @@ const keyLabel = (key: string) =>
                 )}
                 {keyboardRows.length > 0 && (
                   <div
-                    class={`game-keyboard ${asset.keyboardMode === "full" ? "full-keyboard" : "wasd-keyboard"}`}
+                    class={`game-keyboard ${entry.keyboardMode === "full" ? "full-keyboard" : "wasd-keyboard"}`}
                     data-game-keyboard
                     hidden
                   >
@@ -184,8 +260,10 @@ const keyLabel = (key: string) =>
             ) : (
               <div class="play-frame">
                 <div>
-                  <p class="play-title">Export pending</p>
-                  <p class="play-note">{game.playNote}</p>
+                  <p class="play-title">Not playable in-browser</p>
+                  <p class="play-note">
+                    This entry doesn't have a browser build — grab the source or slides below to run or read it.
+                  </p>
                 </div>
               </div>
             )
@@ -193,16 +271,22 @@ const keyLabel = (key: string) =>
         </section>
 
         {
-          visibleLinks.length > 0 && (
+          entry.links.length > 0 && (
             <section class="links-panel">
               <p class="eyebrow">Files</p>
-              <h3>Slides and documents</h3>
+              <h3>Slides and source</h3>
               <div class="link-list">
-                {visibleLinks.map((link) => (
-                  <a class="mini-link" href={encodeURI(withBase(link.href))}>
-                    {link.label}
-                  </a>
-                ))}
+                {entry.links.map((link: any) =>
+                  link.external ? (
+                    <a class="mini-link" href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                    </a>
+                  ) : (
+                    <a class="mini-link" href={encodeURI(withBase(link.href))}>
+                      {link.label}
+                    </a>
+                  )
+                )}
               </div>
             </section>
           )
@@ -210,34 +294,27 @@ const keyLabel = (key: string) =>
       </aside>
     </section>
 
-    <section class="showcase-section">
-      <div class="section-heading">
-        <p class="eyebrow">Slides</p>
-        <h2>Presentation deck</h2>
-      </div>
-
-      {
-        asset.slidePdf ? (
-          <PdfDeckViewer src={asset.slidePdf} title={`${game.title} presentation`} slideImages={slideImages} />
-        ) : (
-          <div class="empty-panel">
-            <h3>PDF preview pending</h3>
-            <p>This entry does not have a PDF export in the archive yet.</p>
+    {
+      entry.slidePdf && (
+        <section class="showcase-section">
+          <div class="section-heading">
+            <p class="eyebrow">Slides</p>
+            <h2>Presentation deck</h2>
           </div>
-        )
-      }
-    </section>
+          <PdfDeckViewer src={entry.slidePdf} title={`${entry.title} presentation`} slideImages={slideImages} />
+        </section>
+      )
+    }
 
-    <section class="showcase-section">
-      <div class="section-heading">
-        <p class="eyebrow">Source</p>
-        <h2>Full source</h2>
-      </div>
-
-      {
-        asset.sourceFiles.length > 0 ? (
+    {
+      entry.sourceFiles.length > 0 && (
+        <section class="showcase-section">
+          <div class="section-heading">
+            <p class="eyebrow">Source</p>
+            <h2>Full source</h2>
+          </div>
           <div class="code-grid">
-            {asset.sourceFiles.map((file) => (
+            {entry.sourceFiles.map((file: any) => (
               <details class="code-panel" data-source-card data-source-url={encodeURI(withBase(file.href))}>
                 <summary>
                   <div>
@@ -253,14 +330,9 @@ const keyLabel = (key: string) =>
               </details>
             ))}
           </div>
-        ) : (
-          <div class="empty-panel">
-            <h3>Source preview pending</h3>
-            <p>No readable source file has been matched to this entry yet.</p>
-          </div>
-        )
-      }
-    </section>
+        </section>
+      )
+    }
   </main>
 </Layout>
 

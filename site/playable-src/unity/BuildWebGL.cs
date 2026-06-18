@@ -89,6 +89,8 @@ public static class JuneJamWebGLBuilder
         return !string.IsNullOrWhiteSpace(path)
             && path.EndsWith(".unity", StringComparison.OrdinalIgnoreCase)
             && (allowSampleScene || !IsSampleScene(path))
+            && !path.StartsWith("Packages/", StringComparison.OrdinalIgnoreCase)
+            && !path.Contains("SceneTemplate", StringComparison.OrdinalIgnoreCase)
             && !path.Contains("/Demo/", StringComparison.OrdinalIgnoreCase)
             && !path.Contains("/Examples", StringComparison.OrdinalIgnoreCase);
     }

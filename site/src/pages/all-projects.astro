@@ -6,15 +6,6 @@ import { otherProjects } from "../data/allProjects";
 import { withBase } from "../utils/paths";
 
 const showcased = [...rankedGames, ...specialGames];
-
-// Label a link by its host so the button reads sensibly (GitHub vs Drive etc.).
-const sourceLabel = (url: string) => {
-  if (url.includes("github.com")) return "GitHub repo";
-  if (url.includes("drive.google.com")) return "Google Drive";
-  if (url.includes("1drv.ms") || url.includes("onedrive")) return "OneDrive";
-  if (url.includes("icloud.com")) return "iCloud";
-  return "Download";
-};
 ---
 
 <Layout
@@ -52,38 +43,18 @@ const sourceLabel = (url: string) => {
       </div>
       <div class="project-grid">
         {otherProjects.map((project) => (
-          <article class="project-card">
+          <a class="project-card" href={withBase(`/games/${project.id}/`)}>
             <div class="tag-row">
               <span class="tag track">{project.track}</span>
               <span class="tag code">{project.code}</span>
-              {project.playSlug && <span class="tag play-state playable">Playable</span>}
+              <span class={`tag play-state ${project.playSlug ? "playable" : "pending"}`}>
+                {project.playSlug ? "Playable" : "Not playable"}
+              </span>
             </div>
             <h3>{project.title || project.blurb}</h3>
             {project.title && <p class="project-blurb">{project.blurb}</p>}
             <p class="project-team">{project.team}</p>
-            <div class="project-links">
-              {project.playSlug && (
-                <a class="mini-link play" href={withBase(`/play/${project.playSlug}/index.html`)}>
-                  ▶ Play
-                </a>
-              )}
-              {project.slides && (
-                <a class="mini-link" href={project.slides} target="_blank" rel="noopener noreferrer">
-                  Slides
-                </a>
-              )}
-              {project.source && (
-                <a class="mini-link" href={project.source} target="_blank" rel="noopener noreferrer">
-                  {sourceLabel(project.source)}
-                </a>
-              )}
-              {project.doc && (
-                <a class="mini-link" href={project.doc} target="_blank" rel="noopener noreferrer">
-                  Write-up
-                </a>
-              )}
-            </div>
-          </article>
+          </a>
         ))}
       </div>
     </section>
