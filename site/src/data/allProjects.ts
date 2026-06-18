@@ -29,6 +29,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "A Hollow Knight–inspired street fighter built around a pen weapon.",
     slides: "https://docs.google.com/presentation/d/1yIwy3addzJ42DcvafPojfsHZIBkzhcZhPlH9ukvY5ao/edit?usp=sharing",
     source: "https://github.com/five8Nf/Sticking-Out",
+    playSlug: "p3",
   },
   {
     id: "p4",
@@ -59,6 +60,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "A fast, beginner-friendly laundry-sorting mini-game.",
     slides: "https://docs.google.com/presentation/d/1OiUvG-CvmmnrxZTHtv7tLvIIsdKRvemvyI7bX5sBXdg/edit?usp=sharing",
     source: "https://drive.google.com/drive/folders/15_J2_XPQpXbcSpnAJdLFJLWVvLg_Mq1W?usp=sharing",
+    playSlug: "p9",
   },
   {
     id: "p10",
@@ -120,6 +122,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "Shrunk down to collect materials and craft your way out, top-down.",
     slides: "https://docs.google.com/presentation/d/1u_TWuNltT0e359ZXWxKnU6uv70OoZQmjyJJczQPybvA/edit",
     source: "https://github.com/leekahhan-del/BuildingBloCS-gamejam-26",
+    playSlug: "p20",
   },
   {
     id: "p22",
@@ -130,6 +133,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "A Blooket-inspired game for learning Python basics.",
     slides: "https://canva.link/mg6p9cntarwx52w",
     source: "https://github.com/q5hwth/JuneJam-P22",
+    playSlug: "p22",
   },
   {
     id: "p23",
@@ -140,6 +144,7 @@ const pygame: DirectoryEntry[] = [
     blurb: "A team-built quest with hand-written code and music.",
     slides: "https://docs.google.com/presentation/d/1DD9ybYNsmNy1wAdUdknpz5wfZUvYy1X35q5npOoEBfQ/edit",
     source: "https://github.com/kavinsakthivel8661/P23-PYGAME-Project",
+    playSlug: "p23",
   },
   {
     id: "p24",
@@ -306,6 +311,7 @@ const unity: DirectoryEntry[] = [
     blurb: "A cybersecurity escape room played from the hacker's seat.",
     slides: "https://docs.google.com/presentation/d/1BhsM7jW08zS-VZ_f3tNe8sKPGrLOfX5flCEdrG3TbeQ/edit?usp=sharing",
     source: "https://github.com/luckynpower/unity-memory0verwrite--u10",
+    playSlug: "u10",
   },
   {
     id: "u11",
