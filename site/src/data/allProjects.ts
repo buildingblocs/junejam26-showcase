@@ -190,13 +190,14 @@ const pygame: DirectoryEntry[] = [
     id: "p25",
     code: "P25",
     track: "Pygame",
-    title: "",
+    title: "Grow a Garden",
     team: "Li Qiaoling, Wong Jing Xiong, Tham Yuan Jun, Yeow Min Shan",
     blurb: "Keep a blooming, withering flower alive under time pressure.",
     writeup:
       "The team initially chased the CSIT prize before realising none of them knew cybersecurity, then settled on a plant-tending game where a flower blooms and withers under time pressure. Drawing and scaling the flower's many states was a last-day scramble, and adding a single class often broke other game logic.",
     slides: "https://canva.link/prx28c3a8ynum3z",
     source: "https://drive.google.com/drive/folders/1xb51HjC0_TyZ_sKerwYQOZDPEVs4LVUg?usp=sharing",
+    playSlug: "p25",
   },
   {
     id: "p27",
@@ -209,6 +210,7 @@ const pygame: DirectoryEntry[] = [
       "The Exam turns the universally shared experience of sitting an exam into a game. The team considered an ambitious time-travel storyline before scoping it down, and pushed through tight deadlines, limited manpower and skill gaps with open communication and compromise.",
     slides: "https://www.canva.com/design/DAHMPjSh3vw/0KJj6xDkLpoL6OlB-lQ0ag/edit?ui=e30",
     source: "https://drive.google.com/drive/folders/1zTv1i_2Uyf4UfR9yTgjPNsYtvBBXo_jb",
+    playSlug: "p27",
   },
   {
     id: "p28",
@@ -246,18 +248,20 @@ const pygame: DirectoryEntry[] = [
       "Built to raise awareness of depression and ADHD, the game represents how negative thoughts chip away at self-esteem. Along the way the team solved the everyday frustration of hard-coded positioning by figuring out how to centre elements against Pygame's coordinate system.",
     slides: "https://canva.link/fwqxa809dtzeekf",
     source: "https://drive.google.com/drive/folders/1v5nUatxa_W8ZSBTw9mUrnMD4-QtQGgI5",
+    playSlug: "p31",
   },
   {
     id: "p32",
     code: "P32",
     track: "Pygame",
-    title: "",
+    title: "Catching the Bus",
     team: "Triston Ng Jun Kai, Yap Xin Yi Kim, Lau Yu Kang, Elyssa Koo Hui Minn",
     blurb: "Dodge obstacles to chase down a departing bus.",
     writeup:
       "Many Singaporeans have sprinted for a departing bus, and this game turns that into an obstacle course to the bus stop. The team narrowed ideas against clear criteria, learned physics and gravity from YouTube and Google, and are proud to have built it without AI.",
     slides: "https://www.canva.com/design/DAHMKnHHKpw/CfQN6gRiK7RymcU7EWeW2A/view",
     source: "https://drive.google.com/drive/folders/1TQ3FmtX1QT_tRIkTK2FmZx0MALk-e48Y?usp=drive_link",
+    playSlug: "p32",
   },
   {
     id: "p33",
