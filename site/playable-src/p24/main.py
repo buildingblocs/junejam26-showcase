@@ -16,6 +16,11 @@ color_passive = pygame.Color('gray15')
 color = color_passive
 input_box_color=color
 state="Start"
+# Track whether the visual-novel music has been started. In the browser build
+# (pygbag/WASM) pygame.mixer.music.get_busy() does not report streaming music as
+# busy, so a per-frame "if not get_busy(): load()+play()" reloads the OGG every
+# frame and freezes the game. Start it once instead.
+novel_music_started = False
 shoot_sound=pygame.mixer.Sound("game_asset/sounds/pew.ogg")
 gameplay_music=pygame.mixer.Sound("game_asset/sounds/gameplaymusic.ogg")
 
@@ -546,15 +551,16 @@ async def main():
     global input_box_color, input_rect, malwares, memories, notification_timer
     global position, registered, registration_time, running, score
     global shoot_delay, show_boss, show_cog_overlay, show_dialogue, spawn_timer
-    global stage, state, streak, switch_timer, switching
+    global stage, state, streak, switch_timer, switching, novel_music_started
     global user_name, user_text, x
     while running:
         while running and state=="Start":
             await asyncio.sleep(0)
             clock.tick(60)
-            if not pygame.mixer.music.get_busy():
+            if not novel_music_started:
                 pygame.mixer.music.load("game_asset/sounds/novelmusic.ogg")
                 pygame.mixer.music.play(-1)
+                novel_music_started = True
             if stage == 4:
                 if active_dialogue in [2, 4]:
                     boss_sprite = boss_upset
