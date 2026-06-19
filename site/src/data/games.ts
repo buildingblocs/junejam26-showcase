@@ -27,8 +27,7 @@ export const games: GameEntry[] = [
     summary:
       "A psychological horror adventure where an alarm clock comes to life, grows stranger over ten days, and changes its ending through player choices.",
     cover: "/assets/images/p6-cover.png",
-    writeup:
-      "The team brainstormed everyday routines and objects before centering their game on an alarm clock and its functions. ALARM CLOCK: Tick's Timebomb turns the unsettling feeling of waking up to an alarm into a psychological horror adventure, with the clock becoming more frightening each day before the player unexpectedly develops feelings for it. Choices made across the story affect the boss fight and ending. Their main challenge was balancing story and comedy, which they handled by planning dialogue carefully so the game stayed fun, strange, and engaging.",
+    writeup: "A psychological horror adventure where your alarm clock comes to life and grows more frightening each day — until, halfway through, you unexpectedly start to develop feelings for it. The choices you make across the ten-day story shape the boss fight and which ending you reach.",
     links: [
       {
         label: "Slides PDF",
@@ -49,8 +48,7 @@ export const games: GameEntry[] = [
     summary:
       "A visual novel concept about memory loss, wayfinding, and how an ordinary walk home can become emotionally difficult.",
     cover: "/assets/images/p15-cover.svg",
-    writeup:
-      "The idea came from a real experience where the team encountered an elderly woman who was lost at an HDB void deck. A wrist tag helped them contact her husband, and they waited with her until he arrived. The moment stayed with them because it showed how a simple journey home can become a real struggle for people living with memory loss. Time limits and unfamiliarity with visual novel workflows in Pygame became major obstacles, so the team used AI as a prototyping aid and learned how important clear prompting is when turning an idea into a playable prototype quickly.",
+    writeup: "A visual novel about memory loss and finding your way home, drawn from a real encounter with an elderly woman lost at a void deck. It puts you in the shoes of someone for whom an ordinary walk home becomes a genuine struggle, told through a quiet, emotional story.",
     links: [
       {
         label: "Submission note",
@@ -71,8 +69,7 @@ export const games: GameEntry[] = [
     summary:
       "A running and fighting game where household problems become interactive enemies and relatable daily obstacles.",
     cover: "/assets/images/p26-cover.png",
-    writeup:
-      "Homebound started from a broad team brainstorm, with ideas voted on and combined into one concept. The team wanted an interactive game rather than a passive screen, so they made the player and enemies represent ordinary challenges such as ants appearing when rice falls on the floor. Their first maze-style design failed because enemies could walk through walls. Instead of patching a weak foundation, they changed direction into a running and fighting game, using lessons from the failed prototype to improve the final version.",
+    writeup: "A running-and-fighting game built around the small challenges of daily life — like ants swarming a grain of rice dropped on the floor. You and the enemies stand in for these everyday nuisances, with interactive, relatable encounters rather than a passive screen.",
     links: [
       {
         label: "Writeup DOCX",
@@ -93,8 +90,7 @@ export const games: GameEntry[] = [
     summary:
       "A Unity game about taking out the trash, scoped around clear mechanics, compact level design, and a new perspective on routine.",
     cover: "/assets/images/u8-cover.png",
-    writeup:
-      "The team found the theme broad, so they brainstormed routines and objects, filtered ideas by fun and feasibility, and eventually chose a trash bag over a book because it could become a complete game within the jam timeline. Their largest design challenge was building a level that introduced mechanics with good pacing and flow. A larger living-room-and-yard map was cut down to a tighter layout. They also debugged both code problems and Unity setup mistakes, using console errors, the debugger, Debug.Log(), and careful checks of object orientation and scene assumptions.",
+    writeup: "A Unity game about the everyday routine of taking out the trash, seen from a fresh angle. A tightly-paced level introduces its mechanics with good flow as you work your way through a compact, polished layout.",
     links: [
       {
         label: "Slides PDF",
@@ -115,8 +111,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     summary:
       "A walking simulator about the student commute, using narration and player choice to turn a mundane journey into comedy.",
     cover: "/assets/images/u4-cover.png",
-    writeup:
-      "The team looked at games they loved and focused on The Stanley Parable, which turns a boring office into something funny and thought-provoking through narration and choice. They applied the same approach to the student commute to a BuildingBloCS workshop. With only two days, they chose a walking simulator because the core mechanics were simple enough to let them spend most of their time writing narrator lines and building the world. The main challenge was resisting scope creep, so they locked the feature list at the end of day one.",
+    writeup: "A Stanley Parable-style walking simulator about the student commute to a BuildingBloCS workshop. The core is simply walking and clicking, with the heart of the game in its branching narration, humour, and the little world you explore.",
     links: [
     ],
     playNote:
@@ -133,8 +128,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     summary:
       "A roguelike-inspired Unity game that asks players to think twice before throwing something away.",
     cover: "/assets/images/u2-cover.png",
-    writeup:
-      "Taking OUT the Trash puts players in the perspective of an item that might otherwise be discarded. The team drew from Brotato and the roguelike genre because it gave them a concept that could expand naturally. They added obstacles, walls, simple pathfinding, and a time-based wave system that rewards skilled players while staying accessible. Time constraints forced cuts to maps, boss fights, weapons, and upgrades, so they leaned into object-oriented structure, tilemaps, layered tiles, and denser pathfinding cells to make the game easier to improve later.",
+    writeup: "A Brotato-inspired roguelike that puts you in the perspective of an item about to be discarded. Survive time-based waves of enemies with obstacles, walls, and enemy pathfinding — a wave system that rewards skilled play while staying accessible to newcomers.",
     links: [
     ],
     playNote:
@@ -151,8 +145,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     summary:
       "A cybersecurity social-deduction game where attackers and defenders race to save or destroy a compromised research lab.",
     cover: "/assets/images/p17-cover.png",
-    writeup:
-      "BREACH came from asking why the social deduction structure of Among Us had not been used to teach cybersecurity. Attackers and defenders become the equivalent of imposters and crewmates, racing against the clock around a compromised research lab. The team had to learn cybersecurity concepts outside their Applied AI background, design useful beginner questions, and validate ideas with friends studying cybersecurity. They also had to learn multiplayer Pygame, with WebSocket real-time sync becoming one of the most difficult parts of the prototype.",
+    writeup: "An Among Us-style social-deduction game that teaches cybersecurity. Attackers and defenders play as the imposters and crewmates, racing the clock around a compromised research lab to either save or destroy it — with real-time multiplayer over WebSockets.",
     links: [
       {
         label: "Slides PDF",
@@ -173,8 +166,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     summary:
       "A 2D platformer RPG about navigating ordinary life from the perspective of someone who is blind.",
     cover: "/assets/images/u16-cover.png",
-    writeup:
-      "The team began with many ideas at different levels of complexity, but as the workshops progressed they realized several concepts were not feasible for beginners in the time available. They landed on a 2D platformer RPG inspired by the demo, with mechanics meant to convey parts of everyday life for someone who is blind. The project involved simplifying hard ideas, learning quickly, and taking small steps through technical and time constraints. Even though the final game changed from the original vision, the team saw it as evidence of how far they had come.",
+    writeup: "A 2D platformer RPG that conveys parts of everyday life for someone who is blind. A cane-tap mechanic briefly lights a small circle around you, so you navigate by sound and limited sight through its puzzle-like spaces.",
     links: [
     ],
     playNote:
@@ -191,8 +183,7 @@ team: "Pan Yinchen, Elliott Huang, Lian Shengzhe, Ricardo Delario",
     summary:
       "A collection of minigames that turns waking up, brushing teeth, eating, homework, and sleeping into playful challenges.",
     cover: "/assets/images/p14-cover.png",
-    writeup:
-      "Daily Life Reimagined came from thinking about how everyday tasks can sometimes be hard. The team turned a normal day into levels about waking up, brushing teeth, eating lunch, doing homework, and going back to bed, each with a twist such as toothpaste monsters or scary things in the dark. Their main challenge was making each level play differently while keeping one story intact, with timers, keyboard controls, scoring systems, and difficulty balancing. They built the game step by step, tested each level, fixed bugs, and improved it together.",
+    writeup: "A collection of mini-games that turns a normal day — waking up, brushing teeth, eating lunch, doing homework, going to bed — into playful levels, each with a twist like toothpaste monsters or things that come alive in the dark, all tied together by one story.",
     links: [
       {
         label: "Slides PDF",
@@ -213,8 +204,7 @@ href: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines o
     summary:
       "A student-teacher endless runner inspired by Subway Surfers and Mario, changing as the player survives longer.",
     cover: "/assets/images/p1-cover.png",
-    writeup:
-      "The team wanted to take the addictive loop of games like Subway Surfers and Mario Bros and turn it into a funny student-teacher chase that changes as the player survives longer. Their biggest challenges were understanding the code patterns taught during the jam and identifying where bugs were coming from. AI helped them debug, though they had to work through explanations several times before the ideas clicked. The final process was difficult but rewarding.",
+    writeup: "An endless runner that turns the addictive Subway Surfers / Mario loop into a funny student-teacher chase that escalates the longer you survive, with varied obstacles, a level-progression system, and a magnet power-up.",
     links: [
       {
         label: "Slides PDF",
@@ -239,8 +229,7 @@ href: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines o
     summary:
       "A deliberately unexpected Pygame entry shaped by task ownership, deadlines, and remote coordination.",
     cover: "/assets/images/p8-cover.png",
-    writeup:
-      "The team came up with the idea through a discussion about something unexpected. Communication was their biggest challenge because one teammate joined the Discord late and the group was not always online at the same time. They handled this by assigning specific tasks to each member and setting internal deadlines for each milestone. That let them work independently and keep progress moving even without constant real-time coordination.",
+    writeup: "A deliberately silly Pygame entry: a character navigates a mall to buy bleach for a shirt stain while salespeople block the way. Fight through them in a short, self-aware, retro-styled romp.",
     links: [
       {
         label: "Slides PDF",
@@ -261,8 +250,7 @@ href: `${w}/P14 - Most Lines of Code - Daily Life Reimagined/slides/most lines o
     summary:
       "A plushie-scale Unity adventure through a giant house, inspired by toys coming to life.",
     cover: "/assets/images/u13-cover.png",
-    writeup:
-      "Inspired by Toy Story, TinyExplorer puts the player in the perspective of a tiny animated plushie navigating giant furniture and obstacles on the way out of the house. The team faced limited programming experience, code bugs, and availability problems during crucial moments. They learned Unity, GitHub version control, and debugging through repeated testing, online resources, instructor help, and teammate support. The result is a game built around critical thinking, observation, and escape.",
+    writeup: "A Toy Story-inspired adventure where you play a tiny plushie navigating giant furniture and obstacles to escape the house, testing your critical-thinking and observation skills as you find the path to freedom.",
     links: [
     ],
     playNote:

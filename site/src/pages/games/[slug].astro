@@ -12,7 +12,7 @@ export function getStaticPaths() {
   // Label a source link by its host so the button reads sensibly. Defined inside
   // getStaticPaths because Astro runs it in isolation from module scope.
   const sourceLabel = (url: string) => {
-    if (url.includes("github.com")) return "GitHub repo";
+    if (url.includes("github.com")) return "Source";
     if (url.includes("drive.google.com")) return "Google Drive";
     if (url.includes("1drv.ms") || url.includes("onedrive")) return "OneDrive";
     if (url.includes("icloud.com")) return "iCloud";
@@ -69,7 +69,7 @@ export function getStaticPaths() {
           playUrl: p.playSlug ? `/play/${p.playSlug}/index.html` : null,
           keyboardMode: p.playSlug && p.track === "Pygame" ? "full" : null,
           slidePdf: p.slidePdf ?? null,
-          sourceFiles: [],
+          sourceFiles: p.sourceFiles ?? [],
           links,
           isWinner: false,
         },
