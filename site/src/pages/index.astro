@@ -7,10 +7,16 @@ import { withBase } from "../utils/paths";
 
 <Layout title="June Jam Game Showcase" description="BuildingBloCS June Jam 2026 winners and special prize showcase.">
   <main class="container">
+    <div
+      class="page-photo-bg"
+      aria-hidden="true"
+      style={`background-image: url(${withBase("/assets/images/hero-bg.jpg")})`}
+    >
+    </div>
     <section class="hero">
       <div>
         <p class="eyebrow">BuildingBloCS June Jam 2026</p>
-        <h1>Winner's Showcase</h1>
+        <h1>Showcase</h1>
         <div class="hero-actions">
           <a class="button primary" href="#winners">Browse winners</a>
           <a class="button" href="#specials">Special prizes</a>

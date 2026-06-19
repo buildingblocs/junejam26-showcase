@@ -124,6 +124,23 @@ select {
   text-transform: uppercase;
 }
 
+.hero .eyebrow {
+  margin-bottom: 14px;
+  font-size: clamp(16px, 2.2vw, 22px);
+}
+
+/* Subtle group-photo wash behind the home page. */
+.page-photo-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
 h1,
 h2,
 h3 {
@@ -186,7 +203,7 @@ h3 {
 
 .game-card {
   position: relative;
-  min-height: 440px;
+  min-height: 372px;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -220,15 +237,15 @@ h3 {
   position: absolute;
   inset: auto 0 0;
   z-index: 1;
-  padding: 22px;
+  padding: 16px 18px;
 }
 
 .card-content h3 {
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 .card-content p {
-  margin: 12px 0 0;
+  margin: 8px 0 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.5;
