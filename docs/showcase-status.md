@@ -33,18 +33,17 @@ U2, U4, U8, U13, U16.
 
 **Directory entries** (`site/src/data/allProjects.ts`):
 
-| Playable (28) | |
+| Playable (30) | |
 |---|---|
 | Pygame (19) | P3, P4, P5, P9, P10, P12, P16, P19, P20, P22, P23, P24, P25, P27, P28, P29, P31, P32, P33 |
-| Unity (9) | U1, U6, U7b, U10, U11, U14, U15 (Morning Routine), U17 (Python), U18 |
+| Unity (11) | U1, U6, U7a (Legend Blast), U7b, U10, U11, U12, U14, U15 (Morning Routine), U17 (Python), U18 |
 
 | Not playable | Why |
 |---|---|
 | **P13** | No source link was ever submitted ("Track_P13") |
 | **U5** | Source listed as "Nil" |
-| **U3, U9** | Source not yet obtained (U9 only has `.unitypackage` exports — needs import-into-project reconstruction) |
-| **U7a** | Build in progress (LEGEND-BLAST / Block Blast RPG) |
-| **U12** | Built; pending in-browser verify + wiring |
+| **U3** | Source not yet obtained |
+| **U9** | Only `.unitypackage` exports — needs import-into-a-project reconstruction |
 | **U15 (Cyberbound)** | Reconstruction builds but renders only a partial/broken scene (team shipped a minimal prototype) — held |
 
 ## Known caveats
