@@ -135,15 +135,22 @@ select {
    additive (only the bright areas show, never darkening into grain), and the
    blur + brightness lift make it read as a clean light wash rather than noise. */
 .page-photo-bg {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Match the photo's own ratio so the full frame shows — no edges cropped. */
+  aspect-ratio: 1920 / 751;
   z-index: -1;
-  background-position: center;
+  background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.32;
-  filter: blur(4px) brightness(1.15) saturate(0.9);
+  opacity: 0.42;
+  filter: blur(2px) brightness(1.1) saturate(0.92);
   pointer-events: none;
+  /* Fade the bottom into the page's blue so the photo sits at the top only. */
+  -webkit-mask-image: linear-gradient(180deg, #000 52%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 52%, transparent 100%);
 }
 
 h1,
