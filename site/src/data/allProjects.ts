@@ -408,6 +408,7 @@ const unity: DirectoryEntry[] = [
       "A teammate's love of horror led to a game where you play a house cat in a lovely home, only to find it is not alone. New to coding for games, the team learned from any resource they could find to ship a tense experience in just over a day.",
     slides: "https://docs.google.com/presentation/d/1HHLNlj_hII-tlmtBJCKL8jYnG3aOESv3va81B9rMEgE/edit?usp=drive_link",
     source: "https://drive.google.com/drive/folders/1LCd2v9EsipwUKg8GIW-i7bchapwgj5x0?usp=drive_link",
+    playSlug: "u12",
   },
   {
     id: "u14",
