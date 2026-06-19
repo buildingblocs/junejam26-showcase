@@ -50,7 +50,12 @@ export function getStaticPaths() {
   // (if any) embeds the same way.
   const restEntries = otherProjects.map((p) => {
     const links = [];
-    if (p.slides) links.push({ label: "Slides", href: p.slides, external: true });
+    // Slides link points at our committed copy in this repo, not the team's
+    // original (often a private Canva/OneDrive edit link).
+    const slidesHref = p.slidePdf
+      ? `https://github.com/buildingblocs/junejam26-showcase/blob/main/site/public${p.slidePdf}`
+      : p.slides;
+    if (slidesHref) links.push({ label: "Slides", href: slidesHref, external: true });
     if (p.source) links.push({ label: sourceLabel(p.source), href: p.source, external: true });
     if (p.doc) links.push({ label: "Write-up doc", href: p.doc, external: true });
     return {

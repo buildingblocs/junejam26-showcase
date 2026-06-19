@@ -695,10 +695,10 @@ h3 {
 
 .pdf-stage {
   display: grid;
-  max-height: min(78vh, 880px);
-  min-height: 560px;
+  max-height: min(80vh, 900px);
+  min-height: 280px;
   overflow: auto;
-  place-items: start center;
+  place-items: center;
   padding: 16px;
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -726,6 +726,7 @@ h3 {
 
 .pdf-stage canvas {
   max-width: 100%;
+  max-height: 74vh;
   border-radius: 6px;
   background: #ffffff;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
@@ -733,12 +734,17 @@ h3 {
 
 .deck-image {
   display: block;
+  /* Fit within both the stage width and height, preserving the slide's own
+     aspect ratio — works for 16:9, 4:3, or anything else, no cropping. The
+     zoom controls scale these two bounds (see PdfDeckViewer). */
   max-width: 100%;
+  max-height: 74vh;
+  width: auto;
   height: auto;
+  margin-inline: auto;
   border-radius: 6px;
   background: #ffffff;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
-  transform-origin: top center;
 }
 
 .pdf-fallback {

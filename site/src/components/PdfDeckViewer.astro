@@ -87,7 +87,10 @@ const hasImages = encodedImages.length > 0;
       next.disabled = pageNumber >= images.length;
       zoomIn.disabled = false;
       zoomOut.disabled = false;
-      image.style.width = `${Math.round(scale * 100)}%`;
+      // Scale the fit-bounds so the slide always fits the stage at 1x and the
+      // zoom controls grow it within both dimensions (any aspect ratio).
+      image.style.maxWidth = `${Math.round(scale * 100)}%`;
+      image.style.maxHeight = `${(scale * 74).toFixed(1)}vh`;
     };
 
     const preloadFirstPages = () => {
