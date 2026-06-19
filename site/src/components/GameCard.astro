@@ -7,9 +7,9 @@ const { game } = Astro.props as { game: GameEntry };
 const isPlayable = Boolean(showcaseAssets[game.slug]?.playUrl);
 
 const tagClass = (tag: string) => {
-  if (tag.includes("Winner") || tag.includes("Runner")) return "rank";
   if (tag === "Pygame" || tag === "Unity") return "track";
-  return "special";
+  // Every award badge (ranked winner or special prize) gets the gold style.
+  return "rank";
 };
 ---
 

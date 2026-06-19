@@ -114,9 +114,9 @@ const sizeLabel = playSize[entry.slug] ?? "";
 const controlsHint = playControls[entry.slug] ?? "";
 
 const tagClass = (tag: string) => {
-  if (tag.includes("Winner") || tag.includes("Runner")) return "rank";
   if (tag === "Pygame" || tag === "Unity") return "track";
-  return "special";
+  // Every award badge (ranked winner or special prize) gets the gold style.
+  return "rank";
 };
 
 const getSlideImages = (slidePdf?: string | null) => {
