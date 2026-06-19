@@ -513,4 +513,18 @@ const unity: DirectoryEntry[] = [
   },
 ];
 
-export const otherProjects: DirectoryEntry[] = [...pygame, ...unity];
+// Directory display order: strongest entries first, weaker ones toward the
+// bottom, based roughly on the judges' aggregate scores (the scores and
+// feedback themselves are intentionally not stored in this repo). Tracks are
+// interleaved so the whole directory reads best-to-weakest rather than
+// Pygame-then-Unity.
+const directoryOrder = [
+  "p23", "p12", "p33", "p27", "p32", "p25", "p3", "p9", "p16", "u3", "u14",
+  "u1", "p24", "p4", "u9", "u15-morning", "p19", "u7a", "u18", "p10", "p29",
+  "u11", "u10", "u12", "u15-cyberbound", "u6", "p28", "p31", "p22", "p13",
+  "p5", "p20", "u7b", "u17", "u5",
+];
+
+export const otherProjects: DirectoryEntry[] = [...pygame, ...unity].sort(
+  (a, b) => directoryOrder.indexOf(a.id) - directoryOrder.indexOf(b.id),
+);
