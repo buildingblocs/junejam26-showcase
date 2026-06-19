@@ -33,20 +33,20 @@ U2, U4, U8, U13, U16.
 
 **Directory entries** (`site/src/data/allProjects.ts`):
 
-| Playable (30) | |
+| Playable (33) | |
 |---|---|
 | Pygame (19) | P3, P4, P5, P9, P10, P12, P16, P19, P20, P22, P23, P24, P25, P27, P28, P29, P31, P32, P33 |
-| Unity (11) | U1, U6, U7a (Legend Blast), U7b, U10, U11, U12, U14, U15 (Morning Routine), U17 (Python), U18 |
+| Unity (14) | U1, U3 (The Great Sink Escape), U6, U7a (Legend Blast), U7b, U9 (The Things We Leave Behind), U10 (Python), U11, U12, U14, U15 (Morning Routine), U15 (Cyberbound), U17 (Python), U18 |
 
 | Not playable | Why |
 |---|---|
 | **P13** | No source link was ever submitted ("Track_P13") |
 | **U5** | Source listed as "Nil" |
-| **U3** | Source not yet obtained |
-| **U9** | Only `.unitypackage` exports — needs import-into-a-project reconstruction |
-| **U15 (Cyberbound)** | Reconstruction builds but renders only a partial/broken scene (team shipped a minimal prototype) — held |
 
 ## Known caveats
+- **U9 "The Things We Leave Behind"**: shipped two files both declaring
+  `class PlayerController` (a CS0111 compile error); removed the stray duplicate
+  to build. Renders its real main menu (START / OPTIONS / HELP) and four scenes.
 - **U7b "Day2Day!"**: menu + character-select render perfectly; entering a level
   shows an empty scene (team heavily downscoped levels).
 - **P31** mapped from the "My Cosmic Game Hub" zip by elimination — confirm the
