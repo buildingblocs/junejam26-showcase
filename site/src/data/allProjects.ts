@@ -317,8 +317,8 @@ const unity: DirectoryEntry[] = [
       "The Great Sink Escape casts you as a bar of soap escaping a sink as the water, and the pressure, rises. Unable to collaborate easily in Unity, the team split the work and refined the platform layout through repeated testing and communication.",
     slidePdf: "/slides/u3.pdf",
     slides: "https://docs.google.com/presentation/d/1-Na0hsQRCeP-WuOojgN2AuKFFm2ec_WcF21qdygooNc/edit?usp=sharing",
-    source: "https://drive.google.com/drive/folders/11bZ3LwfWs32gg9A4XQu3IQYl90X_UBEc",
-  },
+    source: "https://github.com/buildingblocs/junejam26-showcase/tree/main/site/unity-src/u3",
+    playSlug: "u3",  },
   {
     id: "u5",
     code: "U5",
