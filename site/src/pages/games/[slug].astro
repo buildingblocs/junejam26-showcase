@@ -392,8 +392,8 @@ const backLabel = entry.isWinner ? "Back to showcase" : "Back to all projects";
     window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
     /Android|iPhone|iPod/i.test(navigator.userAgent);
 
-  // Click-to-load: the heavy game build is only fetched once the visitor asks,
-  // so just reading the write-up or slides doesn't download tens of MB.
+  // Auto-load: the game build starts downloading the moment the page opens, so
+  // visitors don't have to click a "tap to load" gate first.
   document.querySelectorAll("[data-embed-wrap]").forEach((wrap) => {
     const iframe = wrap.querySelector("[data-play-embed]");
     const loader = wrap.querySelector("[data-play-loader]");
@@ -409,7 +409,7 @@ const backLabel = entry.isWinner ? "Back to showcase" : "Back to all projects";
       }, 150);
     };
 
-    loader?.addEventListener("click", () => {
+    const loadGame = (focus) => {
       if (iframe && iframe.dataset.src && !iframe.src) {
         iframe.src = iframe.dataset.src;
       }
@@ -417,8 +417,13 @@ const backLabel = entry.isWinner ? "Back to showcase" : "Back to all projects";
       if (fullscreenButton) fullscreenButton.hidden = false;
       if (restartButton) restartButton.hidden = false;
       if (keyboard && isTouchDevice) keyboard.hidden = false;
-      focusGame();
-    });
+      if (focus) focusGame();
+    };
+
+    // Start loading immediately on page open (no confirmation). The poster is
+    // still clickable as a fallback and focuses the game when used.
+    loader?.addEventListener("click", () => loadGame(true));
+    loadGame(false);
 
     // Restart: reload the game build from scratch (works for every game without
     // needing an in-game restart key).
