@@ -129,7 +129,9 @@ select {
   font-size: clamp(16px, 2.2vw, 22px);
 }
 
-/* Subtle group-photo wash behind the home page. */
+/* Soft, light group-photo wash behind the home page. Screen blend keeps it
+   additive (only the bright areas show, never darkening into grain), and the
+   blur + brightness lift make it read as a clean light wash rather than noise. */
 .page-photo-bg {
   position: fixed;
   inset: 0;
@@ -137,7 +139,8 @@ select {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.07;
+  opacity: 0.16;
+  filter: blur(5px) brightness(1.7) saturate(0.85);
   pointer-events: none;
 }
 
