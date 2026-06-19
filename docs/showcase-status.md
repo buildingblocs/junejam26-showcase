@@ -43,6 +43,18 @@ U2, U4, U8, U13, U16.
 | **P13** | No source link was ever submitted ("Track_P13") |
 | **U5** | Source listed as "Nil" |
 
+## Slides (`site/public/slides/<id>.pdf`, embedded via `PdfDeckViewer`)
+
+**34 of 35 directory entries have an embedded deck.** Google Slides decks
+export cleanly with `curl …/export/pdf`. Canva/OneDrive/iCloud have no public
+export URL (automated fetch hits a Cloudflare CAPTCHA / login), so the user
+exported those by hand; pipeline on our side:
+- **OneDrive `.pptx`** (P10, U18) → PDF via `soffice --headless --convert-to pdf`.
+- **Oversized image-heavy decks** (P24 47 MB, U15 Cyberbound 37 MB, + a few
+  mid-size) → compressed with `gs -dPDFSETTINGS=/ebook` (150 dpi); 47 MB → 3 MB.
+- The two **U15** decks are `u15-morning.pdf` / `u15-cyberbound.pdf` (id-keyed).
+- **Only P32 (Catching the Bus)** still lacks a deck.
+
 ## Known caveats
 - **U9 "The Things We Leave Behind"**: shipped two files both declaring
   `class PlayerController` (a CS0111 compile error); removed the stray duplicate
