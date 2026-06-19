@@ -68,7 +68,7 @@ export function getStaticPaths() {
           cover: null,
           playUrl: p.playSlug ? `/play/${p.playSlug}/index.html` : null,
           keyboardMode: p.playSlug && p.track === "Pygame" ? "full" : null,
-          slidePdf: null,
+          slidePdf: p.slidePdf ?? null,
           sourceFiles: [],
           links,
           isWinner: false,
